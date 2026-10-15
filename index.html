@@ -1,0 +1,1572 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#07100b">
+<meta name="description" content="A personal birthday experience, made with appreciation for Baba.">
+<title>For Baba — A Birthday Experience</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #07100b;
+  --bg-soft: #0b1710;
+  --panel: #0e1b13;
+  --green: #75dca0;
+  --green-dark: #234d34;
+  --gold: #d9bf8b;
+  --white: #f5f3eb;
+  --muted: #a1aea2;
+  --line: rgba(220, 238, 222, .13);
+  --serif: 'Alegreya', Georgia, 'Times New Roman', serif;
+  --sans: 'DM Sans', Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  margin: 0;
+  color: var(--white);
+  background:
+    radial-gradient(ellipse at 50% -20%, #1c4028 0%, transparent 55%),
+    var(--bg);
+  font-family: var(--sans);
+  font-size: 14px;
+  overflow-x: hidden;
+}
+
+body.modal-open { overflow: hidden; }
+
+button, a { -webkit-tap-highlight-color: transparent; }
+
+button { font: inherit; }
+
+button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 5px;
+}
+
+a { color: inherit; }
+
+::selection {
+  background: var(--green);
+  color: var(--bg);
+}
+
+#particles {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .6;
+}
+
+.site {
+  position: relative;
+  z-index: 1;
+}
+
+.ambient {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    linear-gradient(180deg, transparent 65%, var(--bg) 100%);
+}
+
+nav {
+  position: fixed;
+  z-index: 30;
+  inset: 0 0 auto;
+  min-height: 74px;
+  padding: 15px 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border-bottom: 1px solid transparent;
+  transition: background .3s, border-color .3s;
+}
+
+nav.scrolled {
+  background: rgba(7, 16, 11, .93);
+  border-color: var(--line);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.brand-mark {
+  width: 35px;
+  height: 35px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(217,191,139,.6);
+  border-radius: 50%;
+  color: var(--gold);
+  font: 22px var(--serif);
+}
+
+.brand-name {
+  font: 600 20px var(--serif);
+  letter-spacing: .3px;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-caption {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+}
+
+.music-btn {
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: rgba(255,255,255,.025);
+  color: var(--white);
+  padding: 10px 12px;
+  cursor: pointer;
+  font-size: 10px;
+  letter-spacing: .7px;
+  transition: border-color .2s, background .2s;
+}
+
+.music-btn:hover { border-color: var(--gold); }
+
+section {
+  padding: 110px 7%;
+}
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  padding-top: 145px;
+  padding-bottom: 110px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-inner {
+  max-width: 920px;
+  position: relative;
+  z-index: 2;
+  animation: entrance 1.15s cubic-bezier(.2,.75,.25,1) both;
+}
+
+.hero-orbit {
+  position: absolute;
+  width: min(76vw, 680px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(117,220,160,.07);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: breathe 8s ease-in-out infinite alternate;
+}
+
+.hero-orbit::before,
+.hero-orbit::after {
+  content: "";
+  position: absolute;
+  inset: 10%;
+  border: 1px solid rgba(217,191,139,.055);
+  border-radius: 50%;
+}
+
+.hero-orbit::after { inset: 23%; }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.8;
+}
+
+.eyebrow::before,
+.eyebrow::after {
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: currentColor;
+  opacity: .7;
+}
+
+.hero h1 {
+  margin: 30px 0 24px;
+  font: 500 clamp(65px, 11vw, 128px)/.9 var(--serif);
+  letter-spacing: -3.5px;
+}
+
+.hero h1 em {
+  display: block;
+  margin-top: 13px;
+  color: var(--green);
+  font-weight: 400;
+  font-style: italic;
+  text-shadow: 0 0 65px rgba(117,220,160,.12);
+}
+
+.hero-copy {
+  max-width: 465px;
+  margin: 26px auto;
+  color: #b7c2b8;
+  font: 16px/1.9 var(--serif);
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 33px;
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  min-height: 48px;
+  padding: 14px 21px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  cursor: pointer;
+  font: 600 11px var(--sans);
+  letter-spacing: .6px;
+  text-decoration: none;
+  transition: transform .25s, border-color .25s, background .25s;
+}
+
+.btn:hover { transform: translateY(-2px); }
+
+.btn-primary {
+  background: var(--green);
+  color: #07130b;
+  border-color: var(--green);
+}
+
+.btn-primary:hover {
+  background: #92e8b3;
+  box-shadow: 0 7px 30px rgba(117,220,160,.12);
+}
+
+.btn-secondary {
+  color: var(--white);
+  background: rgba(255,255,255,.025);
+}
+
+.btn-secondary:hover { border-color: var(--gold); }
+
+.scroll-note {
+  position: absolute;
+  bottom: 27px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #829184;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.scroll-note::after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 30px;
+  margin: 12px auto 0;
+  background: linear-gradient(var(--gold), transparent);
+  animation: scrollPulse 1.8s ease-in-out infinite;
+}
+
+.section-head {
+  max-width: 700px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+
+.section-head h2 {
+  margin: 18px 0;
+  font: 500 clamp(40px, 6vw, 70px)/1.05 var(--serif);
+  letter-spacing: -1.6px;
+}
+
+.section-head h2 em { color: var(--green); }
+
+.section-head p {
+  max-width: 475px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 2;
+}
+
+.letter-wrap {
+  max-width: 790px;
+  margin: auto;
+}
+
+.letter {
+  position: relative;
+  padding: clamp(28px, 7vw, 76px);
+  overflow: hidden;
+  border: 1px solid rgba(217,191,139,.2);
+  background:
+    linear-gradient(140deg, rgba(25,54,35,.78), rgba(10,21,13,.92));
+  box-shadow: 0 35px 100px rgba(0,0,0,.15);
+}
+
+.letter::before {
+  content: "“";
+  position: absolute;
+  top: -68px;
+  left: 15px;
+  color: rgba(217,191,139,.08);
+  font: 250px var(--serif);
+  pointer-events: none;
+}
+
+.letter-top {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--line);
+}
+
+.letter-top span {
+  color: var(--gold);
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.letter-date {
+  color: var(--muted) !important;
+  letter-spacing: .5px !important;
+}
+
+.letter h3 {
+  position: relative;
+  margin: 30px 0;
+  font: 500 clamp(31px, 5vw, 49px)/1.18 var(--serif);
+}
+
+.letter p {
+  position: relative;
+  max-width: 590px;
+  margin: 17px 0;
+  color: #c0cbc1;
+  font: 16px/2 var(--serif);
+}
+
+.letter-sign {
+  margin-top: 35px;
+  color: var(--gold);
+  font: italic 27px var(--serif);
+}
+
+.letter-sign small {
+  display: block;
+  margin-top: 10px;
+  color: var(--muted);
+  font: 10px var(--sans);
+  letter-spacing: 1px;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  max-width: 1020px;
+  margin: auto;
+}
+
+.value-card {
+  min-height: 215px;
+  padding: 27px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.018);
+  transition: border-color .3s, background .3s, transform .3s;
+}
+
+.value-card:hover {
+  border-color: rgba(117,220,160,.35);
+  background: rgba(31,65,42,.19);
+  transform: translateY(-5px);
+}
+
+.value-number {
+  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.value-card h3 {
+  margin: 29px 0 12px;
+  font: 500 30px var(--serif);
+}
+
+.value-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.timeline {
+  max-width: 720px;
+  margin: auto;
+  position: relative;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  bottom: 12px;
+  width: 1px;
+  background: linear-gradient(var(--gold), rgba(117,220,160,.08));
+}
+
+.timeline-item {
+  position: relative;
+  padding: 0 0 40px 43px;
+}
+
+.timeline-item:last-child { padding-bottom: 0; }
+
+.timeline-dot {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  width: 11px;
+  height: 11px;
+  border: 1px solid var(--gold);
+  background: var(--bg);
+  border-radius: 50%;
+  box-shadow: 0 0 14px rgba(217,191,139,.13);
+}
+
+.timeline-label {
+  color: var(--gold);
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.timeline-item h3 {
+  margin: 9px 0;
+  font: 500 31px var(--serif);
+}
+
+.timeline-item p {
+  max-width: 540px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 2;
+}
+
+.interests {
+  max-width: 850px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.interest {
+  padding: 30px 16px;
+  text-align: center;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.018);
+}
+
+.interest-symbol {
+  display: block;
+  color: var(--gold);
+  font: 36px var(--serif);
+  margin-bottom: 17px;
+}
+
+.interest h3 {
+  margin: 0 0 8px;
+  font: 500 24px var(--serif);
+}
+
+.interest p {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.gallery-note {
+  max-width: 700px;
+  margin: auto;
+  padding: 35px;
+  text-align: center;
+  border: 1px dashed rgba(217,191,139,.25);
+  background: rgba(255,255,255,.015);
+}
+
+.gallery-note .symbol {
+  color: var(--gold);
+  font: 42px var(--serif);
+}
+
+.gallery-note h3 {
+  font: 500 30px var(--serif);
+  margin: 17px 0 8px;
+}
+
+.gallery-note p {
+  max-width: 420px;
+  margin: auto;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.card-section { padding-top: 80px; }
+
+.digital-card {
+  position: relative;
+  max-width: 760px;
+  min-height: 320px;
+  margin: auto;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 45px 25px;
+  overflow: hidden;
+  border: 1px solid rgba(217,191,139,.38);
+  background:
+    radial-gradient(ellipse at center, rgba(34,83,50,.45), transparent 70%),
+    #09140d;
+  box-shadow: inset 0 0 80px rgba(217,191,139,.025);
+}
+
+.digital-card::before,
+.digital-card::after {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(217,191,139,.12);
+  pointer-events: none;
+}
+
+.digital-card::after { inset: 18px; border-color: rgba(117,220,160,.06); }
+
+.card-content { position: relative; z-index: 1; }
+
+.card-content h3 {
+  margin: 18px 0;
+  font: 500 clamp(43px, 7vw, 72px)/1 var(--serif);
+}
+
+.card-content h3 em { color: var(--green); }
+
+.card-content p {
+  color: #b7c2b8;
+  font: italic 17px/1.8 var(--serif);
+}
+
+.wish-section {
+  padding-top: 120px;
+  padding-bottom: 130px;
+  text-align: center;
+}
+
+.wish-box {
+  max-width: 750px;
+  margin: auto;
+  padding: 55px 20px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.wish-box h2 {
+  margin: 22px 0;
+  font: 500 clamp(48px, 9vw, 91px)/.95 var(--serif);
+  letter-spacing: -2px;
+}
+
+.wish-box h2 em { color: var(--gold); }
+
+.wish-box p {
+  max-width: 440px;
+  margin: 22px auto 30px;
+  color: var(--muted);
+  font: 16px/1.9 var(--serif);
+}
+
+.secret-area {
+  max-width: 520px;
+  margin: 40px auto 0;
+}
+
+.secret-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 0;
+  border-bottom: 1px solid rgba(217,191,139,.35);
+  padding: 9px 0;
+  color: var(--gold);
+  background: transparent;
+  cursor: pointer;
+  font-size: 11px;
+  letter-spacing: .8px;
+}
+
+.secret-message {
+  display: none;
+  margin-top: 22px;
+  padding: 25px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.02);
+  font: italic 22px/1.7 var(--serif);
+  color: var(--white);
+}
+
+.secret-message.open {
+  display: block;
+  animation: revealMessage .6s ease both;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  padding: 25px 7%;
+  border-top: 1px solid var(--line);
+  color: #829184;
+  font-size: 10px;
+  letter-spacing: .7px;
+}
+
+footer strong {
+  color: var(--gold);
+  font-weight: 500;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .75s ease, transform .75s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay-1 { transition-delay: .12s; }
+.delay-2 { transition-delay: .22s; }
+
+.modal {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  background: rgba(3,9,5,.95);
+  backdrop-filter: blur(15px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .35s, visibility .35s;
+}
+
+.modal.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-inner {
+  width: 100%;
+  max-width: 590px;
+  text-align: center;
+  padding: 42px 22px;
+  border: 1px solid rgba(217,191,139,.24);
+  background:
+    radial-gradient(ellipse at center, #163422, #08120b 75%);
+  transform: translateY(15px) scale(.99);
+  transition: transform .4s ease;
+}
+
+.modal.open .modal-inner { transform: translateY(0) scale(1); }
+
+.modal-symbol {
+  color: var(--gold);
+  font: 42px var(--serif);
+  animation: glow 2.5s ease-in-out infinite alternate;
+}
+
+.modal h2 {
+  margin: 25px 0 18px;
+  font: 500 clamp(48px, 9vw, 83px)/.95 var(--serif);
+}
+
+.modal h2 em { color: var(--green); }
+
+.modal p {
+  max-width: 420px;
+  margin: 14px auto;
+  color: #c1cdc2;
+  font: 16px/1.9 var(--serif);
+}
+
+.modal-close { margin-top: 23px; }
+
+.confetti {
+  position: fixed;
+  z-index: 120;
+  top: -20px;
+  pointer-events: none;
+  animation: fall linear forwards;
+}
+
+.toast {
+  position: fixed;
+  z-index: 150;
+  bottom: 25px;
+  left: 50%;
+  transform: translate(-50%, 15px);
+  max-width: calc(100vw - 30px);
+  padding: 13px 18px;
+  background: #13251a;
+  border: 1px solid rgba(217,191,139,.3);
+  color: var(--white);
+  font-size: 11px;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s, transform .3s;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@keyframes entrance {
+  from { opacity: 0; transform: translateY(25px); filter: blur(3px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@keyframes breathe {
+  from { transform: scale(.94) rotate(-4deg); opacity: .45; }
+  to { transform: scale(1.04) rotate(4deg); opacity: .9; }
+}
+
+@keyframes scrollPulse {
+  0%,100% { transform: scaleY(.6); opacity: .4; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+
+@keyframes revealMessage {
+  from { opacity: 0; transform: translateY(9px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 8px rgba(217,191,139,.1); }
+  to { text-shadow: 0 0 28px rgba(217,191,139,.4); }
+}
+
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(500deg); opacity: 0; }
+}
+
+@media (max-width: 720px) {
+  nav { padding: 13px 5%; min-height: 65px; }
+  .brand-name { font-size: 18px; }
+  .nav-caption { display: none; }
+  section { padding: 85px 6%; }
+  .hero { padding-top: 120px; }
+  .hero h1 { letter-spacing: -2px; }
+  .hero-copy { font-size: 15px; }
+  .values-grid { grid-template-columns: 1fr; }
+  .value-card { min-height: 0; padding: 24px; }
+  .value-card h3 { margin-top: 20px; }
+  .interests { grid-template-columns: 1fr; }
+  .interest { padding: 24px 15px; }
+  .interest-symbol { margin-bottom: 8px; }
+  .letter p { font-size: 15px; }
+  .gallery-note { padding: 28px 20px; }
+  footer { justify-content: center; text-align: center; }
+  .hero-orbit { width: 95vw; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
+</head>
+
+<body>
+<canvas id="particles" aria-hidden="true"></canvas>
+<div class="ambient" aria-hidden="true"></div>
+
+<div class="site">
+  <nav id="nav">
+    <a class="brand" href="#home" aria-label="Back to the beginning">
+      <span class="brand-mark">B</span>
+      <span class="brand-name">For Baba.</span>
+    </a>
+
+    <div class="nav-right">
+      <span class="nav-caption">Made with appreciation</span>
+      <button class="music-btn" id="musicBtn" type="button"
+        aria-pressed="false" title="Toggle ambient music">
+        ♫ Music: Off
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-orbit" aria-hidden="true"></div>
+
+      <div class="hero-inner">
+        <div class="eyebrow">15 October · A day for you</div>
+
+        <h1>For the man<br>who means <em>so much.</em></h1>
+
+        <p class="hero-copy">
+          Some gifts come in boxes. Others are made from memories,
+          gratitude, and the little things that words don't always express.
+          This one is made especially for you.
+        </p>
+
+        <div class="actions">
+          <button class="btn btn-primary" type="button"
+            id="openSurprise">
+            Open your surprise <span aria-hidden="true">↗</span>
+          </button>
+          <a class="btn btn-secondary" href="#letter">
+            A letter for Baba
+          </a>
+        </div>
+      </div>
+
+      <div class="scroll-note" aria-hidden="true">Take your time</div>
+    </section>
+
+    <section id="letter">
+      <div class="section-head reveal">
+        <div class="eyebrow">From your son</div>
+        <h2>More than a birthday.<br><em>A thank you.</em></h2>
+        <p>A few words for someone who deserves to hear them.</p>
+      </div>
+
+      <div class="letter-wrap reveal">
+        <article class="letter">
+          <div class="letter-top">
+            <span>A letter for Baba</span>
+            <span class="letter-date">15 · 10 · 2026</span>
+          </div>
+
+          <h3>Dear Baba,</h3>
+
+          <p>
+            You work so hard for us, encourage us when we have dreams,
+            and always find ways to make us feel happy. I may not
+            always say it out loud, but I notice these things, and
+            they mean a lot to me.
+          </p>
+
+          <p>
+            You are my role model. I admire how smart, caring, and
+            hardworking you are. You show me that doing your best,
+            looking after the people you love, and continuing to learn
+            are things worth being proud of.
+          </p>
+
+          <p>
+            Some of my favourite memories are the trips to Dubai and
+            Lahore, along with celebrating your birthdays together.
+            These moments are special to me, and I hope we make
+            many more memories like them.
+          </p>
+
+          <p>
+            I love how you are interested in cars, technology, AI,
+            and travelling. You inspire me to explore ideas of my own,
+            keep creating, and believe that I can turn what I imagine
+            into something real.
+          </p>
+
+          <p>
+            I made this little website myself because I wanted to give
+            you something personal. It isn't just a birthday page.
+            It is a small way of saying thank you for everything
+            you do for us.
+          </p>
+
+          <p>
+            Happy Birthday, Baba. I hope this next year brings you
+            happiness, good health, wonderful journeys, and many
+            reasons to smile.
+          </p>
+
+          <div class="letter-sign">
+            With love and appreciation,
+            <small>YOUR SON</small>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="admiration">
+      <div class="section-head reveal">
+        <div class="eyebrow">What makes you special</div>
+        <h2>Three things I<br><em>look up to.</em></h2>
+        <p>Some of the qualities that make you my role model.</p>
+      </div>
+
+      <div class="values-grid">
+        <article class="value-card reveal">
+          <div class="value-number">01 — YOUR EXAMPLE</div>
+          <h3>A role model</h3>
+          <p>
+            You inspire me through the way you work, the things you
+            teach me, and the example you set every day.
+          </p>
+        </article>
+
+        <article class="value-card reveal delay-1">
+          <div class="value-number">02 — YOUR HEART</div>
+          <h3>Caring & kind</h3>
+          <p>
+            Thank you for caring about us, encouraging us, and
+            helping make our lives happier.
+          </p>
+        </article>
+
+        <article class="value-card reveal delay-2">
+          <div class="value-number">03 — YOUR DEDICATION</div>
+          <h3>Hardworking</h3>
+          <p>
+            The effort you put into what matters reminds me to keep
+            learning, keep trying, and never stop growing.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="memories">
+      <div class="section-head reveal">
+        <div class="eyebrow">Our story</div>
+        <h2>Moments worth<br><em>remembering.</em></h2>
+        <p>
+          The best memories aren't measured by dates. They're measured
+          by how much they mean to us.
+        </p>
+      </div>
+
+      <div class="timeline">
+        <article class="timeline-item reveal">
+          <span class="timeline-dot" aria-hidden="true"></span>
+          <div class="timeline-label">A journey together</div>
+          <h3>Dubai</h3>
+          <p>
+            A trip that became part of our collection of memories.
+            Here's to the places we've explored and the places
+            we have yet to discover.
+          </p>
+        </article>
+
+        <article class="timeline-item reveal">
+          <span class="timeline-dot" aria-hidden="true"></span>
+          <div class="timeline-label">Another special journey</div>
+          <h3>Lahore</h3>
+          <p>
+            Another destination in our story. The journeys we share
+            become memories worth carrying with us.
+          </p>
+        </article>
+
+        <article class="timeline-item reveal">
+          <span class="timeline-dot" aria-hidden="true"></span>
+          <div class="timeline-label">A celebration together</div>
+          <h3>Your birthdays</h3>
+          <p>
+            Every birthday is another chance to celebrate you,
+            appreciate the person you are, and look forward to
+            more wonderful moments together.
+          </p>
+        </article>
+
+        <article class="timeline-item reveal">
+          <span class="timeline-dot" aria-hidden="true"></span>
+          <div class="timeline-label">The next chapter</div>
+          <h3>More memories ahead</h3>
+          <p>
+            More places to explore, more things to learn, more ideas
+            to build, and more birthdays to celebrate.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="interests">
+      <div class="section-head reveal">
+        <div class="eyebrow">Things you enjoy</div>
+        <h2>A mind that keeps<br><em>exploring.</em></h2>
+        <p>
+          A few of the interests that make your world interesting.
+        </p>
+      </div>
+
+      <div class="interests">
+        <article class="interest reveal">
+          <span class="interest-symbol" aria-hidden="true">⌁</span>
+          <h3>Cars</h3>
+          <p>Engineering, design, and the joy of the journey.</p>
+        </article>
+
+        <article class="interest reveal delay-1">
+          <span class="interest-symbol" aria-hidden="true">✳</span>
+          <h3>AI & technology</h3>
+          <p>Ideas, innovation, and a world that keeps evolving.</p>
+        </article>
+
+        <article class="interest reveal delay-2">
+          <span class="interest-symbol" aria-hidden="true">↗</span>
+          <h3>Travelling</h3>
+          <p>New places, new experiences, and memories in the making.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="section-head reveal">
+        <div class="eyebrow">A collection of memories</div>
+        <h2>Not everything<br>needs a <em>photograph.</em></h2>
+        <p>
+          Some memories stay with us even when there's no picture
+          to capture them.
+        </p>
+      </div>
+
+      <div class="gallery-note reveal">
+        <div class="symbol" aria-hidden="true">✳</div>
+        <h3>Dubai. Lahore. Your birthdays.</h3>
+        <p>
+          Three parts of our story, remembered in words.
+          This space can become a photo gallery whenever you
+          decide to add your own family pictures.
+        </p>
+      </div>
+    </section>
+
+    <section class="card-section" id="birthday-card">
+      <div class="section-head reveal">
+        <div class="eyebrow">Made especially for you</div>
+        <h2>A little card.<br><em>A big thank you.</em></h2>
+      </div>
+
+      <article class="digital-card reveal">
+        <div class="card-content">
+          <div class="eyebrow">15 October 2026</div>
+          <h3>Happy Birthday,<br><em>Baba.</em></h3>
+          <p>Thank you for everything you do.</p>
+          <button class="btn btn-primary" id="celebrateBtn" type="button">
+            Celebrate Baba <span aria-hidden="true">✦</span>
+          </button>
+        </div>
+      </article>
+    </section>
+
+    <section class="wish-section" id="final-wish">
+      <div class="wish-box reveal">
+        <div class="eyebrow">A wish for the year ahead</div>
+        <h2>Here's to you,<br><em>Baba.</em></h2>
+        <p>
+          May the coming year bring you happiness, good health,
+          exciting journeys, inspiring ideas, and countless
+          reasons to smile.
+        </p>
+        <button class="btn btn-primary" id="finalSurprise" type="button">
+          One last surprise <span aria-hidden="true">↗</span>
+        </button>
+
+        <div class="secret-area">
+          <button class="secret-trigger" id="secretBtn"
+            type="button" aria-expanded="false"
+            aria-controls="secretMessage">
+            <span aria-hidden="true">✧</span>
+            There's something else for you
+          </button>
+
+          <div class="secret-message" id="secretMessage" hidden>
+            Baba, no matter how many apps I build or how many
+            ideas I bring to life, one of the most important things
+            I will keep learning from is you. Thank you for
+            encouraging me to dream big.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>CREATED WITH CARE · <strong>JUST FOR BABA</strong></span>
+    <span>15 October 2026 · A birthday experience from your son</span>
+  </footer>
+</div>
+
+<div class="modal" id="surpriseModal" role="dialog"
+  aria-modal="true" aria-labelledby="modalTitle"
+  aria-hidden="true">
+  <div class="modal-inner">
+    <div class="modal-symbol" aria-hidden="true">✳</div>
+    <div class="eyebrow">This one's for you</div>
+    <h2 id="modalTitle">Happy Birthday,<br><em>Baba.</em></h2>
+    <p>
+      Thank you for working hard for us, encouraging us,
+      making us happy, and showing me what a role model
+      looks like.
+    </p>
+    <p>
+      This little creation is my way of saying:
+      I appreciate you more than words can express.
+    </p>
+    <button class="btn btn-primary modal-close" id="closeModal" type="button">
+      Back to your birthday
+    </button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+  'use strict';
+
+  const reducedMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  ).matches;
+
+  const $ = id => document.getElementById(id);
+
+  // Navigation.
+  const nav = $('nav');
+
+  function updateNav() {
+    nav.classList.toggle('scrolled', window.scrollY > 25);
+  }
+
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+
+  // Scroll reveal.
+  const revealElements = document.querySelectorAll('.reveal');
+
+  if (!reducedMotion && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    revealElements.forEach(el => observer.observe(el));
+  } else {
+    revealElements.forEach(el => el.classList.add('visible'));
+  }
+
+  // Lightweight decorative particles.
+  const canvas = $('particles');
+  const ctx = canvas.getContext('2d');
+
+  let width = 0;
+  let height = 0;
+  let particles = [];
+  let animationFrame = 0;
+
+  function resizeCanvas() {
+    const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
+    width = window.innerWidth;
+    height = window.innerHeight;
+
+    canvas.width = Math.round(width * ratio);
+    canvas.height = Math.round(height * ratio);
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
+
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+    const count = reducedMotion ? 0 :
+      Math.min(35, Math.floor(width / 25));
+
+    particles = Array.from({ length: count }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      radius: Math.random() * 1.2 + .3,
+      speed: Math.random() * .22 + .06,
+      opacity: Math.random() * .35 + .1,
+      drift: (Math.random() - .5) * .12
+    }));
+  }
+
+  function drawParticles() {
+    ctx.clearRect(0, 0, width, height);
+
+    for (const p of particles) {
+      p.y -= p.speed;
+      p.x += p.drift;
+
+      if (p.y < -3) {
+        p.y = height + 3;
+        p.x = Math.random() * width;
+      }
+
+      if (p.x < -3) p.x = width + 3;
+      if (p.x > width + 3) p.x = -3;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(117,220,160,${p.opacity})`;
+      ctx.fill();
+    }
+
+    if (!reducedMotion) {
+      animationFrame = requestAnimationFrame(drawParticles);
+    }
+  }
+
+  resizeCanvas();
+  drawParticles();
+
+  let resizeTimer;
+
+  window.addEventListener('resize', () => {
+    cancelAnimationFrame(animationFrame);
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      resizeCanvas();
+      drawParticles();
+    }, 120);
+  }, { passive: true });
+
+  // Accessible modal.
+  const modal = $('surpriseModal');
+  let previousFocus = null;
+
+  function openModal() {
+    previousFocus = document.activeElement;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    $('closeModal').focus();
+    celebrate();
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+
+    if (previousFocus && typeof previousFocus.focus === 'function') {
+      previousFocus.focus();
+    }
+  }
+
+  $('openSurprise').addEventListener('click', openModal);
+  $('finalSurprise').addEventListener('click', openModal);
+  $('closeModal').addEventListener('click', closeModal);
+  $('celebrateBtn').addEventListener('click', celebrate);
+
+  modal.addEventListener('click', event => {
+    if (event.target === modal) closeModal();
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && modal.classList.contains('open')) {
+      closeModal();
+    }
+
+    if (event.key === 'Tab' && modal.classList.contains('open')) {
+      const focusable = modal.querySelectorAll('button:not([disabled])');
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  });
+
+  // Birthday celebration.
+  let celebrationTimer = null;
+
+  function celebrate() {
+    if (reducedMotion) {
+      showToast('Happy Birthday, Baba!');
+      return;
+    }
+
+    const symbols = ['✦', '✧', '·', '✳'];
+    const fragment = document.createDocumentFragment();
+
+    for (let i = 0; i < 38; i++) {
+      const particle = document.createElement('span');
+      particle.className = 'confetti';
+      particle.textContent =
+        symbols[Math.floor(Math.random() * symbols.length)];
+
+      particle.style.left = Math.random() * 100 + 'vw';
+      particle.style.color = Math.random() > .5
+        ? '#75dca0' : '#d9bf8b';
+      particle.style.fontSize = (10 + Math.random() * 13) + 'px';
+      particle.style.animationDuration =
+        (2.5 + Math.random() * 2.5) + 's';
+
+      fragment.appendChild(particle);
+      particle.addEventListener('animationend', () => particle.remove());
+    }
+
+    document.body.appendChild(fragment);
+    showToast('A little celebration, just for Baba.');
+
+    clearTimeout(celebrationTimer);
+    celebrationTimer = setTimeout(() => {
+      document.querySelectorAll('.confetti').forEach(el => el.remove());
+    }, 6000);
+  }
+
+  // Secret message.
+  const secretBtn = $('secretBtn');
+  const secretMessage = $('secretMessage');
+
+  secretBtn.addEventListener('click', () => {
+    const willOpen = secretMessage.hidden;
+    secretMessage.hidden = !willOpen;
+    secretMessage.classList.toggle('open', willOpen);
+    secretBtn.setAttribute('aria-expanded', String(willOpen));
+
+    secretBtn.innerHTML = willOpen
+      ? '<span aria-hidden="true">✧</span> Hide my secret message'
+      : '<span aria-hidden="true">✧</span> There\\'s something else for you';
+
+    if (willOpen) {
+      secretMessage.scrollIntoView({
+        behavior: reducedMotion ? 'auto' : 'smooth',
+        block: 'nearest'
+      });
+    }
+  });
+
+  // Small status message.
+  let toastTimer;
+
+  function showToast(message) {
+    const toast = $('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 2800);
+  }
+
+  // Optional ambient music. Generated locally; no audio files needed.
+  // Audio only starts after the visitor explicitly presses the button.
+  const musicBtn = $('musicBtn');
+  let audioContext = null;
+  let masterGain = null;
+  let musicNodes = [];
+  let musicEnabled = false;
+  let noteTimer = null;
+  let noteIndex = 0;
+
+  const melody = [
+    [196.00, 0.45],
+    [246.94, 0.45],
+    [293.66, 0.7],
+    [246.94, 0.45],
+    [220.00, 0.45],
+    [293.66, 0.7],
+    [329.63, 0.9],
+    [293.66, 0.7]
+  ];
+
+  function playNote(frequency, duration) {
+    if (!audioContext || !masterGain || !musicEnabled) return;
+
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+
+    oscillator.type = 'sine';
+    oscillator.frequency.value = frequency;
+
+    const now = audioContext.currentTime;
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(0.025, now + .12);
+    gain.gain.exponentialRampToValueAtTime(
+      0.0001, now + duration
+    );
+
+    oscillator.connect(gain);
+    gain.connect(masterGain);
+
+    oscillator.start(now);
+    oscillator.stop(now + duration + .05);
+    musicNodes.push(oscillator);
+
+    oscillator.addEventListener('ended', () => {
+      oscillator.disconnect();
+      gain.disconnect();
+      musicNodes = musicNodes.filter(node => node !== oscillator);
+    });
+  }
+
+  function scheduleMusic() {
+    if (!musicEnabled) return;
+
+    const note = melody[noteIndex % melody.length];
+    playNote(note[0], note[1]);
+    noteIndex++;
+
+    noteTimer = setTimeout(
+      scheduleMusic,
+      Math.max(500, note[1] * 1000 + 220)
+    );
+  }
+
+  async function startMusic() {
+    const AudioContextClass =
+      window.AudioContext || window.webkitAudioContext;
+
+    if (!AudioContextClass) {
+      showToast('Ambient music is not supported in this browser.');
+      return;
+    }
+
+    try {
+      if (!audioContext) {
+        audioContext = new AudioContextClass();
+        masterGain = audioContext.createGain();
+        masterGain.gain.value = .25;
+        masterGain.connect(audioContext.destination);
+      }
+
+      await audioContext.resume();
+      musicEnabled = true;
+      musicBtn.textContent = '♫ Music: On';
+      musicBtn.setAttribute('aria-pressed', 'true');
+      scheduleMusic();
+    } catch (error) {
+      musicEnabled = false;
+      musicBtn.textContent = '♫ Music: Off';
+      musicBtn.setAttribute('aria-pressed', 'false');
+      showToast('Your browser could not start the music.');
+    }
+  }
+
+  function stopMusic() {
+    musicEnabled = false;
+    clearTimeout(noteTimer);
+    musicBtn.textContent = '♫ Music: Off';
+    musicBtn.setAttribute('aria-pressed', 'false');
+
+    if (masterGain && audioContext) {
+      masterGain.gain.setTargetAtTime(
+        .0001, audioContext.currentTime, .05
+      );
+    }
+
+    setTimeout(() => {
+      if (!musicEnabled && masterGain && audioContext) {
+        masterGain.gain.value = .25;
+      }
+    }, 200);
+  }
+
+  musicBtn.addEventListener('click', () => {
+    if (musicEnabled) {
+      stopMusic();
+    } else {
+      startMusic();
+    }
+  });
+
+  // A subtle hidden easter egg: three quick presses on the brand.
+  let brandClicks = 0;
+  let brandTimer = null;
+
+  document.querySelector('.brand').addEventListener('click', event => {
+    if (event.target.closest('a')) {
+      // Preserve normal navigation, but count repeated clicks.
+      brandClicks++;
+      clearTimeout(brandTimer);
+
+      brandTimer = setTimeout(() => {
+        brandClicks = 0;
+      }, 1600);
+
+      if (brandClicks >= 3) {
+        brandClicks = 0;
+        showToast('Baba, you are the inspiration behind this creation.');
+        celebrate();
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>
