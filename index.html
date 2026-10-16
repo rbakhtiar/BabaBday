@@ -3,82 +3,61 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#07130e">
-<meta name="description" content="A birthday surprise for Baba, made with love by his son.">
-<title>For Baba — A Birthday to Remember</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07110d">
+<meta name="description" content="A birthday celebration for Baba, made with love.">
+<title>Happy Birthday, Baba | A Celebration of You</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* =========================================================
-   01 — DESIGN TOKENS
-========================================================= */
 :root {
-  color-scheme: dark;
-  --bg: #050b08;
-  --bg-soft: #09150f;
-  --panel: rgba(16, 34, 25, .76);
-  --panel-solid: #102219;
-  --green: #163d2b;
-  --green-bright: #4d9a70;
-  --green-light: #a4d8b4;
-  --gold: #d8bc82;
-  --gold-light: #f2e4bd;
-  --text: #f5f0e6;
-  --muted: #b0b8ae;
-  --line: rgba(216, 188, 130, .20);
-  --radius: 24px;
-  --serif: "Alegreya", Georgia, "Times New Roman", serif;
-  --sans: "DM Sans", Arial, sans-serif;
-  --content: 1120px;
-  --ease: cubic-bezier(.22, 1, .36, 1);
-  --shadow: 0 24px 80px rgba(0, 0, 0, .30);
+  --bg: #07110d;
+  --bg-soft: #0b1912;
+  --panel: rgba(19, 36, 27, 0.72);
+  --green: #174d35;
+  --green-light: #317954;
+  --gold: #d9bd83;
+  --gold-light: #f0dfb6;
+  --text: #f4f0e7;
+  --muted: #a9b6ab;
+  --line: rgba(217, 189, 131, 0.2);
+  --serif: "Alegreya", Georgia, serif;
+  --sans: "Inter", Arial, sans-serif;
+  --max-width: 1120px;
 }
 
-/* =========================================================
-   02 — RESET & BASE
-========================================================= */
-*, *::before, *::after {
+* {
   box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 90px;
-  scrollbar-color: #35674a #07100b;
+  scroll-padding-top: 30px;
 }
 
 body {
   margin: 0;
-  min-width: 320px;
   background:
-    radial-gradient(ellipse at 50% -15%, rgba(43, 104, 69, .22), transparent 54%),
+    radial-gradient(ellipse at 50% -15%, rgba(41, 94, 62, .32), transparent 48%),
+    radial-gradient(ellipse at 100% 50%, rgba(24, 67, 44, .12), transparent 35%),
     var(--bg);
   color: var(--text);
   font-family: var(--sans);
-  font-size: 15px;
-  line-height: 1.75;
-  -webkit-font-smoothing: antialiased;
+  line-height: 1.7;
   overflow-x: hidden;
 }
 
-body.modal-open {
-  overflow: hidden;
-}
-
-button, a {
-  -webkit-tap-highlight-color: transparent;
-}
-
-button, input {
-  font: inherit;
-}
-
-button {
-  color: inherit;
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .13;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
 }
 
 a {
@@ -86,2303 +65,1257 @@ a {
   text-decoration: none;
 }
 
+button {
+  font: inherit;
+}
+
 button:focus-visible,
 a:focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 2px solid var(--gold-light);
   outline-offset: 5px;
 }
 
-button:disabled {
-  opacity: .55;
-  cursor: not-allowed;
-}
-
 ::selection {
-  color: #07130e;
   background: var(--gold);
-}
-
-img, svg, canvas {
-  max-width: 100%;
-}
-
-canvas {
-  pointer-events: none;
+  color: var(--bg);
 }
 
 .container {
-  width: min(var(--content), calc(100% - 48px));
+  width: min(var(--max-width), calc(100% - 44px));
   margin-inline: auto;
 }
 
-.section {
-  position: relative;
-  padding: 112px 0;
-}
-
-.section-heading {
-  max-width: 670px;
-  margin: 0 auto 52px;
-  text-align: center;
+.gold {
+  color: var(--gold-light);
 }
 
 .eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
   color: var(--gold);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .24em;
   text-transform: uppercase;
+  letter-spacing: .24em;
+  font-size: .68rem;
+  font-weight: 600;
 }
 
-.eyebrow::before,
-.eyebrow::after {
-  content: "";
-  width: 24px;
-  height: 1px;
-  background: currentColor;
-  opacity: .7;
+.section {
+  padding: 105px 0;
 }
 
-h1, h2, h3, p {
-  margin-top: 0;
+.section-heading {
+  max-width: 650px;
+  margin: 0 auto 48px;
+  text-align: center;
 }
 
-h1, h2, h3 {
-  font-family: var(--serif);
-  font-weight: 500;
-  line-height: 1.12;
-}
-
-h2 {
-  margin: 18px 0;
-  font-size: clamp(2.5rem, 5vw, 4.4rem);
+.section-heading h2 {
+  margin: 12px 0;
+  font: 500 clamp(2.2rem, 5vw, 3.8rem)/1.1 var(--serif);
   letter-spacing: -.035em;
 }
 
 .section-heading p {
-  max-width: 520px;
-  margin: 0 auto;
   color: var(--muted);
+  font-size: .95rem;
 }
 
-.gold-text {
-  color: var(--gold-light);
-  font-style: italic;
-}
+/* Navigation */
 
-.rule {
-  width: 74px;
-  height: 1px;
-  margin: 24px auto;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-}
-
-/* =========================================================
-   03 — AMBIENT BACKGROUND
-========================================================= */
-.ambient {
-  position: fixed;
-  z-index: -1;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.ambient::before,
-.ambient::after {
-  content: "";
+.navbar {
   position: absolute;
-  width: 44vw;
-  height: 44vw;
-  min-width: 300px;
-  min-height: 300px;
-  border-radius: 50%;
-  filter: blur(90px);
-  opacity: .11;
-  animation: ambient-drift 18s ease-in-out infinite alternate;
-}
-
-.ambient::before {
-  top: 8%;
-  left: -24%;
-  background: #237548;
-}
-
-.ambient::after {
-  right: -24%;
-  bottom: 4%;
-  background: #a27c35;
-  animation-delay: -8s;
-}
-
-#particleCanvas {
-  position: fixed;
-  z-index: 0;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: .65;
-}
-
-main, header, footer, .modal {
-  position: relative;
-  z-index: 1;
-}
-
-@keyframes ambient-drift {
-  from { transform: translate3d(0, 0, 0) scale(1); }
-  to { transform: translate3d(8%, -6%, 0) scale(1.16); }
-}
-
-/* =========================================================
-   04 — NAVIGATION
-========================================================= */
-.site-header {
-  position: sticky;
   top: 0;
-  z-index: 20;
-  border-bottom: 1px solid rgba(255,255,255,.055);
-  background: rgba(5, 11, 8, .78);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  padding: 24px 0;
+  border-bottom: 1px solid rgba(255,255,255,.06);
 }
 
-.nav {
-  min-height: 74px;
+.nav-inner {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  align-items: center;
+  gap: 18px;
 }
 
 .brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-shrink: 0;
+  font: 600 1.35rem var(--serif);
+  letter-spacing: .02em;
 }
 
-.brand-mark {
-  width: 38px;
-  height: 38px;
-  display: grid;
-  place-items: center;
-  border: 1px solid rgba(216,188,130,.55);
-  border-radius: 50%;
+.brand span {
   color: var(--gold);
-  font-family: var(--serif);
-  font-size: 20px;
 }
 
-.brand-copy {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.25;
-}
-
-.brand-copy strong {
-  font-family: var(--serif);
-  font-size: 19px;
-  font-weight: 500;
-}
-
-.brand-copy small {
-  margin-top: 3px;
-  color: var(--muted);
-  font-size: 9px;
-  letter-spacing: .14em;
+.nav-note {
+  color: #c0c9bf;
+  font-size: .75rem;
+  letter-spacing: .13em;
   text-transform: uppercase;
 }
 
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 28px;
+/* Hero */
+
+.hero {
+  min-height: 760px;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  position: relative;
+  text-align: center;
+  padding: 140px 0 95px;
+  isolation: isolate;
+  overflow: hidden;
 }
 
-.nav-links a {
-  color: #c2c9c0;
-  font-size: 12px;
-  transition: color .2s ease;
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(180deg, rgba(4,12,8,.1), rgba(4,12,8,.5) 65%, var(--bg)),
+    radial-gradient(ellipse at 50% 35%, rgba(65, 113, 76, .28), transparent 55%);
 }
 
-.nav-links a:hover {
-  color: var(--gold-light);
+.hero-glow {
+  position: absolute;
+  z-index: -1;
+  width: min(700px, 90vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(36,91,58,.18), transparent 68%);
+  filter: blur(10px);
+  pointer-events: none;
 }
 
-.nav-music {
+.hero-content {
+  max-width: 850px;
+  animation: riseIn 1.2s ease both;
+}
+
+.hero-kicker {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  min-height: 40px;
-  padding: 0 15px;
-  border: 1px solid var(--line);
-  border-radius: 99px;
-  background: rgba(255,255,255,.025);
-  cursor: pointer;
-  transition: background .25s ease, border-color .25s ease;
-}
-
-.nav-music:hover {
-  background: rgba(216,188,130,.09);
-  border-color: rgba(216,188,130,.55);
-}
-
-.music-icon {
+  gap: 12px;
   color: var(--gold);
-  font-size: 15px;
+  font-size: .72rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
 }
 
-/* =========================================================
-   05 — HERO
-========================================================= */
-.hero {
-  min-height: min(820px, calc(100svh - 74px));
-  min-height: min(820px, calc(100vh - 74px));
-  display: grid;
-  align-items: center;
-  padding: 90px 0 100px;
-  text-align: center;
-}
-
-.hero-inner {
-  width: min(900px, calc(100% - 36px));
-  margin-inline: auto;
-}
-
-.hero-overline {
-  margin-bottom: 26px;
-  animation: rise-in .9s var(--ease) both;
+.hero-kicker::before,
+.hero-kicker::after {
+  content: "";
+  width: 30px;
+  height: 1px;
+  background: var(--gold);
+  opacity: .7;
 }
 
 .hero h1 {
-  margin: 0;
-  font-size: clamp(4.2rem, 12vw, 9.5rem);
+  margin: 25px 0 18px;
+  font: 500 clamp(4rem, 12vw, 8.8rem)/.9 var(--serif);
   letter-spacing: -.065em;
-  line-height: .92;
-  animation: rise-in 1s .08s var(--ease) both;
 }
 
 .hero h1 span {
   display: block;
-  margin-top: 13px;
   color: var(--gold-light);
   font-style: italic;
   font-weight: 400;
 }
 
 .hero-subtitle {
-  max-width: 510px;
-  margin: 30px auto 0;
-  color: #c0c8bd;
-  font-family: var(--serif);
-  font-size: clamp(19px, 2.5vw, 25px);
-  animation: rise-in 1s .18s var(--ease) both;
-}
-
-.hero-date {
-  margin-top: 25px;
-  color: var(--gold);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .26em;
-  text-transform: uppercase;
-  animation: rise-in 1s .25s var(--ease) both;
+  max-width: 530px;
+  margin: 28px auto 0;
+  color: #c0cbc0;
+  font-size: clamp(.95rem, 2vw, 1.1rem);
 }
 
 .hero-actions {
+  margin-top: 38px;
   display: flex;
   justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
-  gap: 13px;
-  margin-top: 35px;
-  animation: rise-in 1s .32s var(--ease) both;
+  gap: 12px;
 }
 
-.btn {
-  min-height: 50px;
+.button {
   display: inline-flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   gap: 10px;
-  padding: 0 24px;
-  border: 1px solid transparent;
-  border-radius: 99px;
+  min-height: 48px;
+  padding: 13px 22px;
+  border-radius: 3px;
+  border: 1px solid var(--line);
   cursor: pointer;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .025em;
-  transition: transform .25s var(--ease), background .25s ease,
-              border-color .25s ease, box-shadow .25s ease;
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  transition: transform .2s, background .2s, border-color .2s;
 }
 
-.btn:hover {
-  transform: translateY(-3px);
+.button:hover {
+  transform: translateY(-2px);
 }
 
-.btn-primary {
-  color: #102016;
-  background: linear-gradient(135deg, #f0dfb0, #c4a76b);
-  box-shadow: 0 8px 30px rgba(200,169,103,.12);
+.button-primary {
+  color: #10170f;
+  background: linear-gradient(135deg, var(--gold-light), #c6a96b);
+  border-color: transparent;
 }
 
-.btn-primary:hover {
-  background: #f6e8c4;
-  box-shadow: 0 12px 36px rgba(200,169,103,.22);
+.button-primary:hover {
+  background: #f6e8c5;
 }
 
-.btn-secondary {
-  border-color: var(--line);
-  background: rgba(255,255,255,.025);
+.button-secondary {
+  color: var(--text);
+  background: rgba(255,255,255,.035);
 }
 
-.btn-secondary:hover {
-  border-color: rgba(216,188,130,.6);
-  background: rgba(216,188,130,.07);
+.button-secondary:hover {
+  border-color: rgba(217,189,131,.55);
+  background: rgba(255,255,255,.07);
 }
 
-.hero-note {
-  margin-top: 56px;
-  color: #87958a;
-  font-size: 10px;
+.scroll-cue {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #aeb9ae;
+  font-size: .65rem;
   letter-spacing: .18em;
   text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 
 .scroll-line {
+  height: 35px;
   width: 1px;
-  height: 42px;
-  margin: 13px auto 0;
   background: linear-gradient(var(--gold), transparent);
-  animation: scroll-glow 2s ease-in-out infinite;
 }
 
-@keyframes scroll-glow {
-  0%, 100% { opacity: .35; transform: scaleY(.7); }
-  50% { opacity: 1; transform: scaleY(1); }
-}
+/* Music player */
 
-@keyframes rise-in {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* =========================================================
-   06 — OPENING MESSAGE
-========================================================= */
-.message-section {
-  padding-top: 45px;
-}
-
-.message-card {
+.music-wrap {
   position: relative;
-  max-width: 870px;
-  margin: 0 auto;
-  padding: clamp(30px, 6vw, 70px);
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background:
-    radial-gradient(ellipse at 0% 0%, rgba(66,127,83,.16), transparent 55%),
-    linear-gradient(135deg, rgba(17,39,27,.92), rgba(8,19,13,.96));
-  box-shadow: var(--shadow);
-  text-align: center;
-}
-
-.message-card::before {
-  content: "“";
-  position: absolute;
-  top: -32px;
-  left: 18px;
-  color: rgba(216,188,130,.11);
-  font-family: var(--serif);
-  font-size: 180px;
-  line-height: 1;
-  pointer-events: none;
-}
-
-.message-card h2 {
-  position: relative;
-  font-size: clamp(2.2rem, 5vw, 3.6rem);
-}
-
-.message-card p {
-  position: relative;
-  max-width: 610px;
-  margin: 0 auto;
-  color: #c5cdc2;
-  font-family: var(--serif);
-  font-size: clamp(18px, 2.2vw, 23px);
-  line-height: 1.9;
-}
-
-.signature {
-  margin-top: 26px;
-  color: var(--gold);
-  font-family: var(--serif);
-  font-size: 23px;
-  font-style: italic;
-}
-
-/* =========================================================
-   07 — VALUES / REASONS
-========================================================= */
-.values-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 17px;
-}
-
-.value-card {
-  min-height: 235px;
-  padding: 30px 25px;
-  border: 1px solid rgba(255,255,255,.075);
-  border-radius: 20px;
-  background: linear-gradient(145deg, rgba(20,42,29,.74), rgba(8,17,12,.72));
-  transition: transform .35s var(--ease), border-color .35s ease,
-              background .35s ease;
-}
-
-.value-card:hover {
-  transform: translateY(-7px);
-  border-color: rgba(216,188,130,.36);
-  background: linear-gradient(145deg, rgba(29,57,39,.85), rgba(8,17,12,.85));
-}
-
-.value-number {
-  color: var(--gold);
-  font-family: var(--serif);
-  font-size: 17px;
-}
-
-.value-card h3 {
-  margin: 24px 0 10px;
-  font-size: 29px;
-}
-
-.value-card p {
-  margin-bottom: 0;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.8;
-}
-
-/* =========================================================
-   08 — MEMORY TIMELINE
-========================================================= */
-.timeline {
-  position: relative;
-  max-width: 820px;
-  margin: 0 auto;
-}
-
-.timeline::before {
-  content: "";
-  position: absolute;
-  top: 12px;
-  bottom: 12px;
-  left: 50%;
-  width: 1px;
-  background: linear-gradient(transparent, rgba(216,188,130,.55), rgba(77,154,112,.45), transparent);
-}
-
-.timeline-item {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr 36px 1fr;
-  align-items: start;
-  gap: 18px;
-  margin-bottom: 36px;
-}
-
-.timeline-item:last-child {
-  margin-bottom: 0;
-}
-
-.timeline-dot {
-  position: relative;
-  z-index: 1;
-  width: 13px;
-  height: 13px;
-  justify-self: center;
-  margin-top: 7px;
-  border: 2px solid var(--gold);
-  border-radius: 50%;
-  background: var(--bg);
-  box-shadow: 0 0 0 5px rgba(216,188,130,.08);
-}
-
-.timeline-content {
-  padding: 24px;
-  border: 1px solid rgba(255,255,255,.075);
-  border-radius: 18px;
-  background: rgba(13,29,20,.72);
-}
-
-.timeline-item:nth-child(odd) .timeline-content {
-  grid-column: 1;
-  grid-row: 1;
-  text-align: right;
-}
-
-.timeline-item:nth-child(odd) .timeline-dot {
-  grid-column: 2;
-  grid-row: 1;
-}
-
-.timeline-item:nth-child(even) .timeline-content {
-  grid-column: 3;
-  grid-row: 1;
-}
-
-.timeline-item:nth-child(even) .timeline-dot {
-  grid-column: 2;
-  grid-row: 1;
-}
-
-.timeline-content small {
-  color: var(--gold);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .17em;
-  text-transform: uppercase;
-}
-
-.timeline-content h3 {
-  margin: 9px 0;
-  font-size: 27px;
-}
-
-.timeline-content p {
-  margin-bottom: 0;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-/* =========================================================
-   09 — THE LETTER
-========================================================= */
-.letter-section {
-  padding-top: 90px;
-}
-
-.letter-shell {
-  max-width: 790px;
-  margin: 0 auto;
-  padding: clamp(25px, 6vw, 64px);
-  border: 1px solid rgba(216,188,130,.3);
-  border-radius: 5px;
-  background:
-    linear-gradient(135deg, rgba(23,45,31,.95), rgba(10,22,15,.98));
-  box-shadow: 0 30px 100px rgba(0,0,0,.25);
-}
-
-.letter-top {
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
-  padding-bottom: 22px;
-  border-bottom: 1px solid var(--line);
-  color: var(--gold);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-}
-
-.letter-shell h2 {
-  margin: 35px 0 24px;
-  font-size: clamp(2.4rem, 5vw, 4rem);
-}
-
-.letter-copy {
-  color: #d2d8ce;
-  font-family: var(--serif);
-  font-size: clamp(17px, 2.1vw, 20px);
-  line-height: 1.95;
-}
-
-.letter-copy p {
-  margin-bottom: 22px;
-}
-
-.letter-copy strong {
-  color: var(--gold-light);
-  font-weight: 500;
-}
-
-.letter-signoff {
-  margin-top: 32px;
-  color: var(--gold-light);
-  font-family: var(--serif);
-  font-size: 25px;
-  font-style: italic;
-}
-
-.letter-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 28px;
-}
-
-/* =========================================================
-   10 — INTERACTIVE ENVELOPE
-========================================================= */
-.envelope-section {
-  padding-top: 50px;
-  text-align: center;
-}
-
-.envelope-wrap {
-  width: min(430px, 100%);
-  margin: 38px auto 0;
-  perspective: 1100px;
-}
-
-.envelope-button {
-  position: relative;
-  display: block;
-  width: 100%;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-  text-align: center;
-}
-
-.envelope {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1.45;
-  overflow: hidden;
-  border: 1px solid rgba(216,188,130,.38);
-  border-radius: 8px;
-  background: linear-gradient(140deg, #183b28, #0d2116);
-  box-shadow: 0 25px 65px rgba(0,0,0,.35);
-  isolation: isolate;
-}
-
-.envelope::before,
-.envelope::after {
-  content: "";
-  position: absolute;
   z-index: 2;
-  inset: 0;
-  pointer-events: none;
+  margin-top: -1px;
 }
 
-.envelope::before {
-  background: linear-gradient(145deg, transparent 49.5%, rgba(216,188,130,.16) 50%, transparent 50.5%);
-}
-
-.envelope::after {
-  background: linear-gradient(215deg, transparent 49.5%, rgba(216,188,130,.12) 50%, transparent 50.5%);
-}
-
-.envelope-flap {
-  position: absolute;
-  z-index: 4;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 57%;
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  background: linear-gradient(160deg, #2c6544, #163b28);
-  transform-origin: top center;
-  transition: transform .8s var(--ease), opacity .6s ease;
-}
-
-.envelope-seal {
-  position: absolute;
-  z-index: 5;
-  top: 42%;
-  left: 50%;
-  display: grid;
-  place-items: center;
-  width: 54px;
-  height: 54px;
-  border: 1px solid rgba(242,228,189,.72);
-  border-radius: 50%;
-  color: var(--gold-light);
-  background: radial-gradient(circle at 30% 25%, #a27c46, #664923);
-  box-shadow: 0 5px 20px rgba(0,0,0,.25);
-  transform: translate(-50%, -50%);
-  transition: opacity .4s ease, transform .5s var(--ease);
-}
-
-.envelope-label {
-  position: absolute;
-  z-index: 1;
-  top: 65%;
-  left: 0;
-  width: 100%;
-  padding: 0 12px;
-  color: var(--gold-light);
-  font-family: var(--serif);
-  font-size: clamp(24px, 5vw, 33px);
-}
-
-.envelope-prompt {
-  display: block;
-  margin-top: 20px;
-  color: var(--muted);
-  font-size: 11px;
-  letter-spacing: .08em;
-}
-
-.envelope-button[aria-expanded="true"] .envelope-flap {
-  transform: rotateX(180deg);
-  opacity: .45;
-}
-
-.envelope-button[aria-expanded="true"] .envelope-seal {
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(.5);
-}
-
-.secret-message {
-  display: none;
-  margin: 26px auto 0;
-  padding: 25px;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  background: rgba(16,34,25,.8);
-  animation: rise-in .6s var(--ease) both;
-}
-
-.secret-message.is-open {
-  display: block;
-}
-
-.secret-message p {
-  margin: 0;
-  color: var(--gold-light);
-  font-family: var(--serif);
-  font-size: clamp(20px, 3vw, 27px);
-  line-height: 1.7;
-}
-
-/* =========================================================
-   11 — BIRTHDAY CARD
-========================================================= */
-.card-section {
-  padding-top: 60px;
-}
-
-.birthday-card {
-  position: relative;
-  max-width: 790px;
-  margin: 0 auto;
-  padding: clamp(32px, 7vw, 78px);
-  overflow: hidden;
-  border: 1px solid rgba(216,188,130,.38);
-  border-radius: 6px;
-  background:
-    radial-gradient(ellipse at 50% 0%, rgba(80,132,84,.25), transparent 65%),
-    linear-gradient(150deg, #10271a, #07120c);
-  text-align: center;
-}
-
-.birthday-card::before,
-.birthday-card::after {
-  content: "✦";
-  position: absolute;
-  color: rgba(216,188,130,.35);
-  font-size: 40px;
-}
-
-.birthday-card::before {
-  top: 18px;
-  left: 22px;
-}
-
-.birthday-card::after {
-  right: 22px;
-  bottom: 18px;
-}
-
-.card-small {
-  color: var(--gold);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .25em;
-  text-transform: uppercase;
-}
-
-.birthday-card h2 {
-  margin: 22px 0;
-  font-size: clamp(3rem, 8vw, 6rem);
-}
-
-.birthday-card p {
-  max-width: 500px;
-  margin: 0 auto;
-  color: #c5cfc3;
-  font-family: var(--serif);
-  font-size: 20px;
-}
-
-.card-signature {
-  margin-top: 26px;
-  color: var(--gold-light);
-  font-family: var(--serif);
-  font-size: 24px;
-  font-style: italic;
-}
-
-/* =========================================================
-   12 — CLASSICAL / INSTRUMENTAL MUSIC PLAYER
-========================================================= */
-.music-panel {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 26px;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
+.music-card {
+  display: flex;
   align-items: center;
-  gap: 20px;
+  justify-content: space-between;
+  gap: 22px;
+  padding: 24px 28px;
+  background: rgba(13, 29, 20, .92);
   border: 1px solid var(--line);
-  border-radius: 20px;
-  background: rgba(15,32,22,.85);
+  border-radius: 5px;
+  box-shadow: 0 18px 70px rgba(0,0,0,.18);
 }
 
-.music-art {
-  width: 68px;
-  height: 68px;
+.music-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.music-disc {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  border-radius: 50%;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(216,188,130,.4);
-  border-radius: 14px;
-  background: linear-gradient(145deg, #284d34, #0c1c12);
   color: var(--gold-light);
-  font-family: var(--serif);
-  font-size: 28px;
+  border: 1px solid rgba(217,189,131,.5);
+  background: radial-gradient(circle, #244d35, #0b1a11 72%);
+  font-size: 1.1rem;
 }
 
-.music-info h3 {
-  margin: 0 0 3px;
-  font-size: 25px;
+.music-title {
+  font-weight: 600;
+  font-size: .9rem;
 }
 
-.music-info p {
-  margin: 0;
+.music-description {
   color: var(--muted);
-  font-size: 11px;
+  font-size: .76rem;
+  margin-top: 2px;
 }
 
 .music-status {
-  margin-top: 7px !important;
-  color: var(--green-light) !important;
+  color: var(--gold);
+  font-size: .7rem;
+  margin-top: 4px;
 }
 
-.music-status.error {
-  color: #efb5a8 !important;
-}
-
-.music-toggle {
-  width: 49px;
-  height: 49px;
-  display: grid;
-  place-items: center;
-  border: 1px solid rgba(216,188,130,.5);
-  border-radius: 50%;
-  color: #101c13;
-  background: var(--gold-light);
+.music-button {
+  flex: 0 0 auto;
+  background: transparent;
+  color: var(--gold-light);
+  border: 1px solid rgba(217,189,131,.45);
+  border-radius: 3px;
+  padding: 11px 16px;
   cursor: pointer;
-  font-size: 18px;
-  transition: transform .25s ease, background .25s ease;
+  font-size: .76rem;
 }
 
-.music-toggle:hover {
-  transform: scale(1.06);
-  background: white;
+.music-button:hover {
+  background: rgba(217,189,131,.1);
 }
 
-.music-toggle:disabled {
-  cursor: wait;
-}
+/* Introduction */
 
-.music-footnote {
-  margin: 14px 0 0;
-  color: #7f8e81;
-  font-size: 10px;
+.intro {
+  padding: 115px 0 70px;
   text-align: center;
 }
 
-.equalizer {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  height: 16px;
-  margin-left: 6px;
-  vertical-align: middle;
+.intro-quote {
+  max-width: 760px;
+  margin: 22px auto;
+  font: 400 clamp(2rem, 5vw, 3.7rem)/1.22 var(--serif);
+  letter-spacing: -.025em;
 }
 
-.equalizer span {
-  width: 3px;
-  height: 5px;
-  border-radius: 5px;
-  background: var(--green-light);
-}
-
-.music-panel.is-playing .equalizer span {
-  animation: equalize .55s ease-in-out infinite alternate;
-}
-
-.music-panel.is-playing .equalizer span:nth-child(2) {
-  animation-delay: -.25s;
-}
-
-.music-panel.is-playing .equalizer span:nth-child(3) {
-  animation-delay: -.4s;
-}
-
-@keyframes equalize {
-  from { height: 4px; }
-  to { height: 15px; }
-}
-
-/* =========================================================
-   13 — FINAL SECTION & FOOTER
-========================================================= */
-.final-section {
-  padding-bottom: 125px;
-  text-align: center;
-}
-
-.final-section h2 {
-  max-width: 800px;
-  margin-inline: auto;
-  font-size: clamp(2.7rem, 7vw, 5.5rem);
-}
-
-.final-section p {
-  max-width: 520px;
+.intro-copy {
+  max-width: 580px;
   margin: 0 auto;
   color: var(--muted);
-  font-family: var(--serif);
-  font-size: 20px;
 }
 
-.final-section .btn {
-  margin-top: 28px;
-}
+/* Qualities */
 
-.site-footer {
-  padding: 26px 0;
-  border-top: 1px solid rgba(255,255,255,.07);
-  background: rgba(0,0,0,.15);
-}
-
-.footer-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.qualities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
 }
 
-.footer-inner p {
-  margin: 0;
-  color: #859187;
-  font-size: 10px;
+.quality-card {
+  min-height: 225px;
+  padding: 30px 25px;
+  border: 1px solid var(--line);
+  background: linear-gradient(145deg, rgba(26,53,36,.54), rgba(10,22,15,.48));
+  transition: transform .25s, border-color .25s;
 }
 
-.footer-brand {
+.quality-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(217,189,131,.48);
+}
+
+.quality-number {
+  font: 400 1.9rem var(--serif);
   color: var(--gold);
-  font-family: var(--serif);
-  font-size: 17px;
 }
 
-/* =========================================================
-   14 — SURPRISE MODAL
-========================================================= */
-.modal {
-  position: fixed;
-  z-index: 100;
-  inset: 0;
+.quality-card h3 {
+  font: 500 1.55rem var(--serif);
+  margin: 20px 0 8px;
+}
+
+.quality-card p {
+  color: var(--muted);
+  font-size: .86rem;
+  margin: 0;
+}
+
+/* Memories */
+
+.memories {
+  background: linear-gradient(180deg, transparent, rgba(14,31,20,.52), transparent);
+}
+
+.memory-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.memory-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 280px;
+  padding: 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(ellipse at 80% 15%, rgba(79,126,80,.22), transparent 50%),
+    linear-gradient(145deg, #142b1d, #0a160f 78%);
+}
+
+.memory-card::after {
+  content: "";
+  position: absolute;
+  width: 210px;
+  height: 210px;
+  border: 1px solid rgba(217,189,131,.1);
+  border-radius: 50%;
+  top: -80px;
+  right: -55px;
+  box-shadow: 0 0 0 25px rgba(217,189,131,.025),
+              0 0 0 50px rgba(217,189,131,.018);
+  pointer-events: none;
+}
+
+.memory-tag {
+  color: var(--gold);
+  font-size: .67rem;
+  text-transform: uppercase;
+  letter-spacing: .2em;
+}
+
+.memory-card h3 {
+  position: relative;
+  z-index: 1;
+  margin: 12px 0 8px;
+  font: 500 2rem/1.1 var(--serif);
+}
+
+.memory-card p {
+  position: relative;
+  z-index: 1;
+  color: #b7c2b7;
+  font-size: .87rem;
+  max-width: 380px;
+  margin: 0;
+}
+
+/* The message */
+
+.message-section {
+  padding: 100px 0 115px;
+}
+
+.message-card {
+  width: min(760px, 100%);
+  margin: 0 auto;
+  padding: clamp(27px, 6vw, 58px);
+  border: 1px solid rgba(217,189,131,.28);
+  background:
+    linear-gradient(145deg, rgba(20,42,28,.94), rgba(9,22,14,.96));
+  box-shadow: 0 25px 90px rgba(0,0,0,.18);
+  position: relative;
+}
+
+.message-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 2px;
+  background: var(--gold);
+}
+
+.message-label {
+  margin: 0 0 24px;
+  color: var(--gold);
+  font-size: .68rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+
+.message-card h2 {
+  margin: 0 0 22px;
+  font: 500 clamp(2.5rem, 6vw, 4rem)/1.02 var(--serif);
+  letter-spacing: -.035em;
+}
+
+.message-body {
+  max-width: 570px;
+  color: #d1d9d0;
+  font: 400 1.04rem/1.95 var(--serif);
+}
+
+.message-body p {
+  margin: 0 0 17px;
+}
+
+.message-body p:last-child {
+  margin-bottom: 0;
+}
+
+.signature {
+  margin-top: 32px;
+  padding-top: 23px;
+  border-top: 1px solid var(--line);
+}
+
+.signature-small {
+  color: var(--muted);
+  font-size: .75rem;
+}
+
+.signature-name {
+  color: var(--gold-light);
+  font: italic 500 1.8rem var(--serif);
+  margin-top: 4px;
+}
+
+/* Final celebration */
+
+.final-section {
+  min-height: 590px;
+  padding: 110px 0 120px;
   display: grid;
   place-items: center;
-  padding: 22px;
-  background: rgba(2,7,4,.84);
-  backdrop-filter: blur(13px);
-  -webkit-backdrop-filter: blur(13px);
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity .3s ease, visibility .3s ease;
-}
-
-.modal.is-open {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
-
-.modal-dialog {
-  position: relative;
-  width: min(560px, 100%);
-  max-height: 85vh;
-  overflow-y: auto;
-  padding: clamp(30px, 7vw, 62px);
-  border: 1px solid rgba(216,188,130,.4);
-  border-radius: 22px;
-  background:
-    radial-gradient(ellipse at 50% 0%, rgba(61,112,69,.24), transparent 65%),
-    #0b1910;
-  box-shadow: 0 30px 120px rgba(0,0,0,.5);
   text-align: center;
-  transform: translateY(18px) scale(.98);
-  transition: transform .4s var(--ease);
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(34,91,55,.24), transparent 63%);
 }
 
-.modal.is-open .modal-dialog {
-  transform: translateY(0) scale(1);
+.final-inner {
+  max-width: 750px;
 }
 
-.modal-close {
-  position: absolute;
-  top: 13px;
-  right: 13px;
-  width: 38px;
-  height: 38px;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  background: rgba(255,255,255,.04);
-  cursor: pointer;
-  font-size: 20px;
-}
-
-.modal-symbol {
+.final-ornament {
   color: var(--gold);
-  font-size: 32px;
+  font-size: 1.3rem;
+  letter-spacing: .6em;
+  margin-bottom: 24px;
 }
 
-.modal-dialog h2 {
-  margin: 15px 0;
-  font-size: clamp(2.5rem, 7vw, 4rem);
+.final-section h2 {
+  margin: 0;
+  font: 500 clamp(3.2rem, 9vw, 6.5rem)/.99 var(--serif);
+  letter-spacing: -.055em;
 }
 
-.modal-dialog p {
-  color: #c4cec2;
-  font-family: var(--serif);
-  font-size: 20px;
-  line-height: 1.8;
-}
-
-.modal-signature {
-  color: var(--gold-light);
-  font-family: var(--serif);
-  font-size: 24px;
+.final-section h2 span {
+  display: block;
   font-style: italic;
+  color: var(--gold-light);
 }
 
-/* =========================================================
-   15 — SCROLL REVEALS
-========================================================= */
-.js-reveal {
+.final-section p {
+  max-width: 480px;
+  color: var(--muted);
+  margin: 26px auto 30px;
+}
+
+.final-button {
+  color: var(--gold-light);
+  background: transparent;
+  border: 1px solid rgba(217,189,131,.55);
+  padding: 14px 23px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: .78rem;
+}
+
+.final-button:hover {
+  background: rgba(217,189,131,.1);
+}
+
+.footer {
+  padding: 25px 0 32px;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,.07);
+  color: #89988b;
+  font-size: .72rem;
+}
+
+.footer strong {
+  color: var(--gold);
+  font-weight: 500;
+}
+
+/* Confetti */
+
+#confettiCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Entrance effects */
+
+.reveal {
   opacity: 0;
   transform: translateY(22px);
-  transition: opacity .75s var(--ease), transform .75s var(--ease);
+  transition: opacity .8s ease, transform .8s ease;
 }
 
-.js-reveal.is-visible {
+.reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-.js-reveal.is-visible .value-card {
-  animation: rise-in .65s var(--ease) both;
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.js-reveal.is-visible .value-card:nth-child(2) {
-  animation-delay: .1s;
-}
-
-.js-reveal.is-visible .value-card:nth-child(3) {
-  animation-delay: .2s;
-}
-
-/* =========================================================
-   16 — RESPONSIVE LAYOUT
-========================================================= */
-@media (min-width: 1400px) {
-  .hero {
-    min-height: 780px;
-  }
-}
-
-@media (max-width: 800px) {
-  .section {
-    padding: 85px 0;
-  }
-
-  .nav {
-    min-height: 66px;
-  }
-
-  .nav-links {
-    gap: 16px;
-  }
-
-  .nav-links a {
-    font-size: 11px;
-  }
-
-  .nav-music {
-    padding-inline: 11px;
-  }
-
-  .values-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .value-card:last-child {
-    grid-column: 1 / -1;
-    min-height: 190px;
-  }
-
-  .hero {
-    min-height: 680px;
-    min-height: min(760px, calc(100vh - 66px));
-  }
-}
-
-@media (max-width: 560px) {
-  .container {
-    width: calc(100% - 32px);
-  }
-
-  .section {
-    padding: 70px 0;
-  }
-
-  .section-heading {
-    margin-bottom: 35px;
-  }
-
-  .nav {
-    flex-wrap: wrap;
-    padding: 10px 0;
-    gap: 8px;
-  }
-
-  .brand-mark {
-    width: 33px;
-    height: 33px;
-  }
-
-  .brand-copy strong {
-    font-size: 17px;
-  }
-
-  .brand-copy small {
-    font-size: 8px;
-  }
-
-  .nav-links {
-    order: 3;
-    width: 100%;
-    justify-content: center;
-    gap: clamp(14px, 5vw, 27px);
-    padding-top: 7px;
-  }
-
-  .nav-links a {
-    font-size: 10px;
-  }
-
-  .nav-music {
-    min-height: 35px;
-    font-size: 10px;
-  }
-
-  .hero {
-    min-height: 650px;
-    min-height: min(720px, calc(100svh - 105px));
-    padding: 75px 0;
-  }
-
-  .hero h1 {
-    font-size: clamp(4rem, 17vw, 6.6rem);
-  }
-
-  .hero-subtitle {
-    font-size: 19px;
-  }
-
-  .hero-note {
-    margin-top: 40px;
-  }
-
-  .message-card {
-    padding: 35px 23px;
-  }
-
-  .values-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  .value-card,
-  .value-card:last-child {
-    grid-column: auto;
-    min-height: auto;
-    padding: 25px;
-  }
-
-  .value-card h3 {
-    margin-top: 14px;
-  }
-
-  .timeline::before {
-    left: 7px;
-  }
-
-  .timeline-item {
-    grid-template-columns: 16px minmax(0, 1fr);
-    gap: 13px;
-    margin-bottom: 18px;
-  }
-
-  .timeline-dot,
-  .timeline-item:nth-child(odd) .timeline-dot,
-  .timeline-item:nth-child(even) .timeline-dot {
-    grid-column: 1;
-    grid-row: 1;
-    margin-top: 7px;
-  }
-
-  .timeline-content,
-  .timeline-item:nth-child(odd) .timeline-content,
-  .timeline-item:nth-child(even) .timeline-content {
-    grid-column: 2;
-    grid-row: 1;
-    padding: 22px;
-    text-align: left;
-  }
-
-  .letter-shell {
-    padding: 26px 22px;
-  }
-
-  .letter-top {
-    font-size: 8px;
-    letter-spacing: .1em;
-  }
-
-  .letter-copy {
-    font-size: 18px;
-  }
-
-  .letter-actions {
-    flex-direction: column;
-  }
-
-  .letter-actions .btn {
-    width: 100%;
-  }
-
-  .music-panel {
-    grid-template-columns: auto 1fr;
-    gap: 14px;
-    padding: 18px;
-  }
-
-  .music-art {
-    width: 52px;
-    height: 52px;
-  }
-
-  .music-info h3 {
-    font-size: 21px;
-  }
-
-  .music-toggle {
-    grid-column: 1 / -1;
-    width: 100%;
-    height: 44px;
-    border-radius: 99px;
-  }
-
-  .footer-inner {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-/* =========================================================
-   17 — ACCESSIBILITY / MOTION
-========================================================= */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     scroll-behavior: auto !important;
     animation-duration: .01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
   }
 
-  #particleCanvas {
-    display: none;
-  }
-
-  .js-reveal {
+  .reveal {
     opacity: 1;
     transform: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .container {
+    width: min(100% - 30px, var(--max-width));
+  }
+
+  .navbar {
+    padding: 19px 0;
+  }
+
+  .nav-note {
+    font-size: .6rem;
+    letter-spacing: .08em;
+  }
+
+  .hero {
+    min-height: 760px;
+    min-height: 94svh;
+    padding-top: 120px;
+  }
+
+  .hero h1 {
+    font-size: clamp(3.7rem, 16vw, 6rem);
+  }
+
+  .section {
+    padding: 75px 0;
+  }
+
+  .music-card {
+    padding: 19px 16px;
+    gap: 12px;
+  }
+
+  .music-info {
+    gap: 11px;
+  }
+
+  .music-disc {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+  }
+
+  .music-button {
+    padding: 10px 12px;
+  }
+
+  .qualities-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .quality-card {
+    min-height: auto;
+    padding: 23px;
+  }
+
+  .quality-card h3 {
+    margin-top: 10px;
+  }
+
+  .memory-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .memory-card {
+    min-height: 230px;
+    padding: 26px;
+  }
+
+  .message-section {
+    padding: 70px 0 85px;
+  }
+
+  .message-card {
+    padding: 27px 23px;
+  }
+
+  .message-body {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .final-section {
+    min-height: 520px;
+    padding: 80px 0;
   }
 }
 </style>
 </head>
 
 <body>
-<div class="ambient" aria-hidden="true"></div>
-<canvas id="particleCanvas" aria-hidden="true"></canvas>
 
-<header class="site-header">
-  <nav class="nav container" aria-label="Main navigation">
-    <a class="brand" href="#home" aria-label="For Baba, home">
-      <span class="brand-mark">B</span>
-      <span class="brand-copy">
-        <strong>For Baba</strong>
-        <small>A letter from your son</small>
-      </span>
-    </a>
+<canvas id="confettiCanvas" aria-hidden="true"></canvas>
 
-    <div class="nav-links">
-      <a href="#memories">Memories</a>
-      <a href="#letter">The Letter</a>
-      <a href="#surprise">Surprise</a>
-    </div>
+<!-- Music file: place happy-birthday.ogg inside an assets folder.
+     The remote sources are fallbacks; the local file is recommended. -->
+<audio id="birthdayAudio" preload="none" loop>
+  <source src="assets/happy-birthday.ogg" type="audio/ogg">
+  <source src="https://upload.wikimedia.org/wikipedia/commons/transcoded/0/02/Happy_Birthday_to_You.ogg/Happy_Birthday_to_You.ogg.mp3" type="audio/mpeg">
+  <source src="https://upload.wikimedia.org/wikipedia/commons/0/02/Happy_Birthday_to_You.ogg" type="audio/ogg">
+</audio>
 
-    <button class="nav-music" type="button" data-music-toggle>
-      <span class="music-icon" aria-hidden="true">♫</span>
-      <span data-music-label>Play music</span>
-    </button>
-  </nav>
+<header class="navbar">
+  <div class="container nav-inner">
+    <a class="brand" href="#top">For <span>Baba.</span></a>
+    <div class="nav-note">A day worth celebrating</div>
+  </div>
 </header>
 
 <main>
   <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="hero-inner">
-      <div class="hero-overline eyebrow">A little something, just for you</div>
+  <section class="hero" id="top">
+    <div class="hero-glow"></div>
+
+    <div class="container hero-content">
+      <div class="hero-kicker">October 15, 2026</div>
 
       <h1>
-        Happy Birthday
+        Happy Birthday,
         <span>Baba.</span>
       </h1>
 
       <p class="hero-subtitle">
-        For the man who inspires me to dream bigger,
-        work harder, and become a better person.
+        For the man whose hard work, kindness, and wisdom mean more
+        than words could ever fully express.
       </p>
 
-      <div class="hero-date">15 October · A day worth celebrating</div>
-
       <div class="hero-actions">
-        <a class="btn btn-primary" href="#letter">
-          Read your letter <span aria-hidden="true">↗</span>
+        <a class="button button-primary" href="#message">
+          A message for you <span aria-hidden="true">↘</span>
         </a>
-        <button class="btn btn-secondary" type="button" id="surpriseButton">
-          Reveal your surprise <span aria-hidden="true">✦</span>
+
+        <button class="button button-secondary" id="heroMusicButton" type="button">
+          ♫ Play the music
         </button>
       </div>
-
-      <div class="hero-note">Made with love · From your son</div>
-      <div class="scroll-line" aria-hidden="true"></div>
     </div>
+
+    <a class="scroll-cue" href="#music" aria-label="Scroll down">
+      <span>Take a moment</span>
+      <span class="scroll-line"></span>
+    </a>
   </section>
 
-  <!-- PERSONAL MESSAGE -->
-  <section class="section message-section">
+  <!-- MUSIC -->
+  <section class="music-wrap" id="music">
     <div class="container">
-      <div class="message-card js-reveal">
-        <span class="eyebrow">A few words from the heart</span>
-        <h2>Some people inspire you.<br><span class="gold-text">You do both.</span></h2>
-        <div class="rule"></div>
-        <p>
-          You work hard, encourage us to chase our dreams,
-          and always find ways to make us feel happy.
-          I hope you know how much that means to me.
-          Today, I want to celebrate not just your birthday,
-          but the incredible person you are.
-        </p>
-        <div class="signature">With love, always.</div>
+      <div class="music-card">
+        <div class="music-info">
+          <div class="music-disc" aria-hidden="true">♫</div>
+          <div>
+            <div class="music-title">A birthday melody</div>
+            <div class="music-description">A little music for your special day</div>
+            <div class="music-status" id="musicStatus" role="status">
+              Ready when you are
+            </div>
+          </div>
+        </div>
+
+        <button class="music-button" id="musicButton" type="button">
+          ▶ Play
+        </button>
       </div>
     </div>
   </section>
 
-  <!-- REASONS -->
-  <section class="section" id="why">
+  <!-- INTRO -->
+  <section class="intro">
+    <div class="container reveal">
+      <div class="eyebrow">More than a birthday</div>
+
+      <p class="intro-quote">
+        Some people make life better simply by being
+        <span class="gold"><em>themselves.</em></span>
+      </p>
+
+      <p class="intro-copy">
+        Today is about celebrating you — your journey, your character,
+        the memories we share, and all the little things that make you
+        such an important part of our lives.
+      </p>
+    </div>
+  </section>
+
+  <!-- QUALITIES -->
+  <section class="section" id="qualities">
     <div class="container">
-      <div class="section-heading js-reveal">
-        <span class="eyebrow">What makes you, you</span>
-        <h2>My everyday <span class="gold-text">inspiration.</span></h2>
-        <p>Three things I admire about you — and a thousand more I could never fit on one page.</p>
+      <div class="section-heading reveal">
+        <div class="eyebrow">What makes you special</div>
+        <h2>A man worth looking up to.</h2>
+        <p>Not just for what you do, but for the person you are.</p>
       </div>
 
-      <div class="values-grid js-reveal">
-        <article class="value-card">
-          <span class="value-number">01 / The example</span>
-          <h3>My role model.</h3>
-          <p>You show me that actions matter, that effort counts, and that I can keep learning every day.</p>
+      <div class="qualities-grid">
+        <article class="quality-card reveal">
+          <div class="quality-number">01</div>
+          <h3>Your intelligence</h3>
+          <p>
+            Your curiosity, ideas, and ability to understand the world
+            inspire me to keep learning.
+          </p>
         </article>
 
-        <article class="value-card">
-          <span class="value-number">02 / The mind</span>
-          <h3>Brilliantly smart.</h3>
-          <p>I love how you think, solve problems, and help me see possibilities I hadn't considered.</p>
+        <article class="quality-card reveal">
+          <div class="quality-number">02</div>
+          <h3>Your hard work</h3>
+          <p>
+            The effort you put into your responsibilities shows me
+            what dedication really means.
+          </p>
         </article>
 
-        <article class="value-card">
-          <span class="value-number">03 / The heart</span>
-          <h3>Always caring.</h3>
-          <p>Behind all the hard work is a dad who wants the people he loves to feel supported and happy.</p>
+        <article class="quality-card reveal">
+          <div class="quality-number">03</div>
+          <h3>Your kindness</h3>
+          <p>
+            The way you care, encourage us, and help us feel happy
+            means more than you might realise.
+          </p>
         </article>
       </div>
     </div>
   </section>
 
   <!-- MEMORIES -->
-  <section class="section" id="memories">
+  <section class="section memories" id="memories">
     <div class="container">
-      <div class="section-heading js-reveal">
-        <span class="eyebrow">Our little collection</span>
-        <h2>Moments worth <span class="gold-text">keeping.</span></h2>
-        <p>Not every memory needs a photograph. Some stay with you because of how they made you feel.</p>
+      <div class="section-heading reveal">
+        <div class="eyebrow">Our story</div>
+        <h2>Moments that stay with us.</h2>
+        <p>
+          From places we've explored to the everyday moments that
+          become our favourite memories.
+        </p>
       </div>
 
-      <div class="timeline js-reveal">
-        <article class="timeline-item">
-          <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="timeline-content">
-            <small>A city of wonder</small>
-            <h3>Dubai</h3>
-            <p>A trip together, new sights to discover, and memories I get to carry with me.</p>
-          </div>
+      <div class="memory-grid">
+        <article class="memory-card reveal">
+          <div class="memory-tag">The adventures</div>
+          <h3>Dubai and beyond.</h3>
+          <p>
+            The places we visit, the things we discover, and the
+            experiences that become part of our story.
+          </p>
         </article>
 
-        <article class="timeline-item">
-          <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="timeline-content">
-            <small>Another chapter</small>
-            <h3>Lahore</h3>
-            <p>Another journey to remember — because the best part of travelling is who you share it with.</p>
-          </div>
+        <article class="memory-card reveal">
+          <div class="memory-tag">Our roots</div>
+          <h3>Lahore memories.</h3>
+          <p>
+            Another place in our story, filled with experiences
+            worth remembering and sharing.
+          </p>
         </article>
 
-        <article class="timeline-item">
-          <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="timeline-content">
-            <small>Every celebration</small>
-            <h3>Your birthdays</h3>
-            <p>All the birthdays we've celebrated, each one another reason to be thankful for you.</p>
-          </div>
+        <article class="memory-card reveal">
+          <div class="memory-tag">Things you love</div>
+          <h3>Cars, AI, and technology.</h3>
+          <p>
+            Your interest in the future, clever ideas, and the
+            machines that make the world move.
+          </p>
         </article>
 
-        <article class="timeline-item">
-          <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="timeline-content">
-            <small>Still to come</small>
-            <h3>More adventures</h3>
-            <p>More places to explore, more conversations about cars and AI, and plenty of stories still to make.</p>
-          </div>
+        <article class="memory-card reveal">
+          <div class="memory-tag">The little things</div>
+          <h3>Simply being together.</h3>
+          <p>
+            Because the best memories aren't always grand adventures.
+            Sometimes, they're the ordinary moments with family.
+          </p>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- LETTER -->
-  <section class="section letter-section" id="letter">
+  <!-- CLEAN MESSAGE SECTION -->
+  <section class="message-section" id="message">
     <div class="container">
-      <div class="section-heading js-reveal">
-        <span class="eyebrow">Please read this</span>
-        <h2>A letter for <span class="gold-text">Baba.</span></h2>
-        <p>No fancy words can say everything. But these are the words I wanted you to have.</p>
-      </div>
+      <article class="message-card reveal">
+        <p class="message-label">From your son, with love</p>
 
-      <article class="letter-shell js-reveal">
-        <div class="letter-top">
-          <span>For Baba, with love</span>
-          <span>15 · 10 · 2026</span>
-        </div>
+        <h2>Dear <span class="gold">Baba,</span></h2>
 
-        <h2>Dear Baba,</h2>
-
-        <div class="letter-copy">
+        <div class="message-body">
           <p>
-            Happy Birthday! Today is your day, and I wanted to make
-            something special that comes from me — something that
-            reminds you how much you mean to me.
+            Happy Birthday! I hope this new year of your life brings
+            you happiness, good health, peace, and countless reasons
+            to smile.
           </p>
 
           <p>
-            Thank you for working so hard for us, for encouraging us,
-            and for always finding ways to make us happy. I know that
-            being a dad takes effort, patience, and care, and I want
-            you to know that I appreciate everything you do.
+            Thank you for working hard, encouraging us, teaching us,
+            and always trying to make us happy. I notice the effort
+            you put into so many things, and I appreciate it more
+            than I can explain.
           </p>
 
           <p>
-            You're my role model. I admire how smart you are, how
-            hard you work, and how much you care about the people
-            around you. You make me want to learn more, build things,
-            dream bigger, and keep improving myself.
+            You're someone I look up to — not only because of what
+            you know or what you achieve, but because of the person
+            you are. Your intelligence, care, and determination
+            inspire me to become better every day.
           </p>
 
           <p>
-            I'll always treasure our trips to <strong>Dubai</strong>
-            and <strong>Lahore</strong>, our birthday celebrations,
-            and all the little moments that make our memories special.
-            I look forward to many more adventures with you — whether
-            we're travelling somewhere new or talking about cars and
-            the latest AI technology.
+            I hope I can make you proud, just as you make me proud
+            to be your son. No website could fit everything I want
+            to say, but I wanted to make something special just for you.
           </p>
 
           <p>
-            I hope this next year brings you happiness, good health,
-            exciting adventures, and plenty of reasons to smile.
-            You deserve to feel as appreciated as you make the rest
-            of us feel.
-          </p>
-
-          <p>
-            Thank you for being you, Baba. I might not always say
-            everything out loud, but I am grateful to have you as my dad.
+            Have an amazing birthday, Baba. You deserve all the
+            happiness this world has to offer.
           </p>
         </div>
 
-        <div class="letter-signoff">Happy Birthday, Baba.</div>
-        <p style="margin:8px 0 0;color:var(--muted);font-size:12px">
-          With all my love, from your son.
-        </p>
-
-        <div class="letter-actions">
-          <button class="btn btn-primary" type="button" id="letterSurprise">
-            Open the birthday surprise ✦
-          </button>
-          <button class="btn btn-secondary" type="button" id="copyLetter">
-            Copy this letter
-          </button>
+        <div class="signature">
+          <div class="signature-small">With love, always</div>
+          <div class="signature-name">Your son, Rahim</div>
         </div>
-        <p id="copyStatus" role="status" aria-live="polite" style="margin:12px 0 0;color:var(--muted);font-size:12px"></p>
       </article>
     </div>
   </section>
 
-  <!-- ENVELOPE -->
-  <section class="section envelope-section" id="surprise">
-    <div class="container">
-      <div class="section-heading js-reveal">
-        <span class="eyebrow">One last little secret</span>
-        <h2>Something <span class="gold-text">just for you.</span></h2>
-        <p>There is one more message waiting for you. Open it whenever you're ready.</p>
-      </div>
+  <!-- END OF PAGE: CONFETTI TRIGGERS HERE -->
+  <section class="final-section" id="celebration">
+    <div class="container final-inner reveal">
+      <div class="final-ornament" aria-hidden="true">✦ &nbsp; ✧ &nbsp; ✦</div>
 
-      <div class="envelope-wrap js-reveal">
-        <button class="envelope-button" id="envelopeButton"
-          type="button" aria-expanded="false" aria-controls="secretMessage"
-          aria-label="Open the birthday envelope">
-          <span class="envelope" aria-hidden="true">
-            <span class="envelope-flap"></span>
-            <span class="envelope-seal">B</span>
-            <span class="envelope-label">For Baba</span>
-          </span>
-          <span class="envelope-prompt" id="envelopePrompt">TAP TO OPEN YOUR LETTER</span>
-        </button>
+      <div class="eyebrow">One more thing</div>
 
-        <div class="secret-message" id="secretMessage" aria-live="polite">
-          <p>
-            Baba, whatever I build or achieve in life,
-            I hope I always make you proud.
-            Thank you for believing in me and giving me
-            reasons to believe in myself.
-            <br><br>
-            <span class="gold-text">You're one of my greatest gifts.</span>
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+      <h2 class="ending-title">
+        The world is better
+        <span>with you in it.</span>
+      </h2>
 
-  <!-- DIGITAL CARD -->
-  <section class="section card-section">
-    <div class="container">
-      <div class="birthday-card js-reveal">
-        <div class="card-small">A little birthday card, made by hand</div>
-        <h2>Happy Birthday,<br><span class="gold-text">Baba.</span></h2>
-        <div class="rule"></div>
-        <p>
-          To more happiness, more adventures, more dreams coming true,
-          and more wonderful years ahead.
-        </p>
-        <div class="card-signature">Love, your son.</div>
-        <button class="btn btn-primary" type="button" id="celebrateButton" style="margin-top:28px">
-          Celebrate! ✦
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- MUSIC -->
-  <section class="section" id="music">
-    <div class="container">
-      <div class="section-heading js-reveal">
-        <span class="eyebrow">A birthday soundtrack</span>
-        <h2>Press play, <span class="gold-text">Baba.</span></h2>
-        <p>A synthesized instrumental version of the classic birthday tune, just for the occasion.</p>
-      </div>
-
-      <div class="music-panel js-reveal" id="musicPanel">
-        <div class="music-art" aria-hidden="true">♫</div>
-
-        <div class="music-info">
-          <h3>Happy Birthday</h3>
-          <p>Instrumental · Synthesized melody</p>
-          <p class="music-status" id="musicStatus" role="status" aria-live="polite">
-            Ready when you are.
-          </p>
-          <span class="equalizer" aria-hidden="true">
-            <span></span><span></span><span></span>
-          </span>
-        </div>
-
-        <button class="music-toggle" type="button" id="musicToggle"
-          aria-label="Play birthday music" data-music-toggle>
-          <span data-music-icon aria-hidden="true">▶</span>
-        </button>
-      </div>
-
-      <p class="music-footnote">
-        Music requires an internet connection. Playback begins only when you press play.
-      </p>
-    </div>
-  </section>
-
-  <!-- CLOSING -->
-  <section class="section final-section">
-    <div class="container js-reveal">
-      <span class="eyebrow">Before you go</span>
-      <h2>Some things are too important to leave <span class="gold-text">unsaid.</span></h2>
       <p>
-        You're appreciated more than you know, Baba.
-        Happy Birthday — here's to everything wonderful still ahead.
+        Here's to another year of new adventures, great ideas,
+        family memories, and moments worth celebrating.
       </p>
-      <button class="btn btn-primary" type="button" id="finalSurprise">
-        One more surprise ✦
+
+      <button class="final-button" id="celebrateButton" type="button">
+        Celebrate Baba's birthday
       </button>
     </div>
   </section>
 </main>
 
-<footer class="site-footer">
-  <div class="footer-inner container">
-    <span class="footer-brand">For Baba.</span>
-    <p>Made with love, thought, and a little bit of code.</p>
-    <p>15 October 2026</p>
-  </div>
+<footer class="footer">
+  Made especially for <strong>Baba</strong> · October 15, 2026
 </footer>
-
-<!-- SURPRISE MODAL -->
-<div class="modal" id="birthdayModal" role="dialog"
-  aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
-  <div class="modal-dialog">
-    <button class="modal-close" type="button" id="closeModal"
-      aria-label="Close surprise">×</button>
-    <div class="modal-symbol" aria-hidden="true">✦</div>
-    <span class="eyebrow">Made especially for you</span>
-    <h2 id="modalTitle">Happy Birthday,<br><span class="gold-text">Baba.</span></h2>
-    <div class="rule"></div>
-    <p>
-      My biggest wish is that you stay happy, feel loved,
-      and know how much you mean to me.
-      Thank you for being my dad, my role model,
-      and someone I can always look up to.
-    </p>
-    <div class="modal-signature">Love you, Baba.</div>
-    <button class="btn btn-primary" type="button" id="modalCelebrate" style="margin-top:24px">
-      Celebrate this moment ✦
-    </button>
-  </div>
-</div>
-
-<!-- Public-domain synthesized instrumental recording.
-     The audio source is loaded only when playback is requested. -->
-<audio id="birthdayAudio" preload="none" loop>
-  <source
-    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Happy_Birthday_to_You.ogg"
-    type="audio/ogg">
-</audio>
 
 <script>
 "use strict";
 
-/* =========================================================
-   01 — UTILITIES & SAFE EVENT HELPERS
-========================================================= */
-const $ = (selector, root = document) => root.querySelector(selector);
-const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+/* -----------------------------
+   MUSIC PLAYER
+----------------------------- */
 
-const prefersReducedMotion =
-  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const birthdayAudio = document.getElementById("birthdayAudio");
+const musicButton = document.getElementById("musicButton");
+const heroMusicButton = document.getElementById("heroMusicButton");
+const musicStatus = document.getElementById("musicStatus");
 
-function on(element, eventName, callback, options) {
-  if (element) {
-    element.addEventListener(eventName, callback, options);
-  }
+birthdayAudio.volume = 0.65;
+
+let musicIsPlaying = false;
+
+function updateMusicUI(playing, message) {
+  musicIsPlaying = playing;
+
+  musicButton.textContent = playing ? "Ⅱ Pause" : "▶ Play";
+  heroMusicButton.textContent = playing
+    ? "Ⅱ Pause the music"
+    : "♫ Play the music";
+
+  musicStatus.textContent = message;
 }
 
-/* =========================================================
-   02 — SCROLL REVEALS
-========================================================= */
-function initReveals() {
-  const elements = $$(".js-reveal");
-
-  if (!("IntersectionObserver" in window) || prefersReducedMotion) {
-    elements.forEach(element => element.classList.add("is-visible"));
+async function toggleMusic() {
+  if (musicIsPlaying && !birthdayAudio.paused) {
+    birthdayAudio.pause();
+    updateMusicUI(false, "Music paused");
     return;
   }
 
-  const observer = new IntersectionObserver((entries, instance) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
+  musicStatus.textContent = "Loading music…";
 
-      entry.target.classList.add("is-visible");
-      instance.unobserve(entry.target);
+  try {
+    await birthdayAudio.play();
+    updateMusicUI(true, "Now playing");
+  } catch (error) {
+    updateMusicUI(false, "Music couldn't load — check the audio file");
+    console.error("Birthday music playback failed:", error);
+  }
+}
+
+musicButton.addEventListener("click", toggleMusic);
+heroMusicButton.addEventListener("click", toggleMusic);
+
+birthdayAudio.addEventListener("play", () => {
+  updateMusicUI(true, "Now playing");
+});
+
+birthdayAudio.addEventListener("pause", () => {
+  if (birthdayAudio.ended) return;
+  updateMusicUI(false, "Music paused");
+});
+
+birthdayAudio.addEventListener("error", () => {
+  updateMusicUI(false, "Audio unavailable — add the local music file");
+});
+
+/* -----------------------------
+   REVEAL SECTIONS ON SCROLL
+----------------------------- */
+
+const revealItems = document.querySelectorAll(".reveal");
+
+if ("IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
     });
   }, {
-    threshold: 0.12,
-    rootMargin: "0px 0px -35px 0px"
+    threshold: 0.12
   });
 
-  elements.forEach(element => observer.observe(element));
+  revealItems.forEach(item => revealObserver.observe(item));
+} else {
+  revealItems.forEach(item => item.classList.add("visible"));
 }
 
-initReveals();
+/* -----------------------------
+   LIGHTWEIGHT CONFETTI ENGINE
+   Uses canvas instead of hundreds
+   of separate DOM elements.
+----------------------------- */
 
-/* =========================================================
-   03 — PARTICLE BACKGROUND
-   Lightweight canvas; pauses when the page is hidden.
-========================================================= */
-function initParticles() {
-  const canvas = $("#particleCanvas");
-  if (!canvas || prefersReducedMotion) return;
+const canvas = document.getElementById("confettiCanvas");
+const ctx = canvas.getContext("2d");
 
-  const ctx = canvas.getContext("2d");
-  if (!ctx) return;
+let canvasWidth = 0;
+let canvasHeight = 0;
+let particles = [];
+let animationFrame = null;
+let lastFrameTime = 0;
 
-  let width = 0;
-  let height = 0;
-  let particles = [];
-  let raf = 0;
-  let lastFrame = 0;
+const confettiColors = [
+  "#d9bd83",
+  "#f0dfb6",
+  "#347a50",
+  "#6ca879",
+  "#f4f0e7",
+  "#a68b53",
+  "#b9d2a9"
+];
 
-  const maxParticles = 38;
-  const rand = (min, max) => min + Math.random() * (max - min);
+function resizeCanvas() {
+  const ratio = Math.min(window.devicePixelRatio || 1, 2);
 
-  function resize() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+  canvasWidth = window.innerWidth;
+  canvasHeight = window.innerHeight;
 
-    width = window.innerWidth;
-    height = window.innerHeight;
+  canvas.width = Math.round(canvasWidth * ratio);
+  canvas.height = Math.round(canvasHeight * ratio);
 
-    canvas.width = Math.round(width * dpr);
-    canvas.height = Math.round(height * dpr);
-    canvas.style.width = width + "px";
-    canvas.style.height = height + "px";
+  canvas.style.width = canvasWidth + "px";
+  canvas.style.height = canvasHeight + "px";
 
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-    const count = Math.min(maxParticles, Math.floor(width / 24));
-    particles = Array.from({ length: count }, () => ({
-      x: rand(0, width),
-      y: rand(0, height),
-      radius: rand(.6, 1.8),
-      speed: rand(5, 15),
-      drift: rand(-3, 3),
-      alpha: rand(.12, .55)
-    }));
-  }
-
-  function draw(timestamp) {
-    raf = 0;
-
-    if (document.hidden) return;
-
-    // Limit the particle animation to approximately 30 frames per second.
-    if (timestamp - lastFrame < 32) {
-      raf = requestAnimationFrame(draw);
-      return;
-    }
-    lastFrame = timestamp;
-
-    ctx.clearRect(0, 0, width, height);
-
-    for (const particle of particles) {
-      particle.y -= particle.speed * .032;
-      particle.x += particle.drift * .032;
-
-      if (particle.y < -5) {
-        particle.y = height + 5;
-        particle.x = rand(0, width);
-      }
-
-      if (particle.x < -5) particle.x = width + 5;
-      if (particle.x > width + 5) particle.x = -5;
-
-      ctx.beginPath();
-      ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(216,188,130,${particle.alpha})`;
-      ctx.fill();
-    }
-
-    raf = requestAnimationFrame(draw);
-  }
-
-  function start() {
-    if (!raf && !document.hidden) {
-      raf = requestAnimationFrame(draw);
-    }
-  }
-
-  function stop() {
-    if (raf) cancelAnimationFrame(raf);
-    raf = 0;
-  }
-
-  let resizeTimer;
-  on(window, "resize", () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(resize, 120);
-  }, { passive: true });
-
-  on(document, "visibilitychange", () => {
-    if (document.hidden) {
-      stop();
-    } else {
-      lastFrame = 0;
-      start();
-    }
-  });
-
-  resize();
-  start();
+  ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
 }
 
-initParticles();
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas, { passive: true });
 
-/* =========================================================
-   04 — ENVELOPE REVEAL
-========================================================= */
-const envelopeButton = $("#envelopeButton");
-const secretMessage = $("#secretMessage");
-const envelopePrompt = $("#envelopePrompt");
-
-on(envelopeButton, "click", () => {
-  const isOpen = envelopeButton.getAttribute("aria-expanded") === "true";
-  const nextState = !isOpen;
-
-  envelopeButton.setAttribute("aria-expanded", String(nextState));
-  envelopeButton.setAttribute(
-    "aria-label",
-    nextState ? "Close the birthday envelope" : "Open the birthday envelope"
-  );
-
-  secretMessage.classList.toggle("is-open", nextState);
-
-  if (envelopePrompt) {
-    envelopePrompt.textContent = nextState
-      ? "YOUR SECRET MESSAGE IS OPEN"
-      : "TAP TO OPEN YOUR LETTER";
-  }
-
-  if (nextState) {
-    celebrate(65);
-  }
-});
-
-/* =========================================================
-   05 — SURPRISE MODAL
-========================================================= */
-const modal = $("#birthdayModal");
-const closeModalButton = $("#closeModal");
-let lastFocusedElement = null;
-
-function openModal() {
-  if (!modal) return;
-
-  lastFocusedElement = document.activeElement;
-
-  modal.classList.add("is-open");
-  modal.setAttribute("aria-hidden", "false");
-  document.body.classList.add("modal-open");
-
-  closeModalButton?.focus();
-
-  celebrate(55);
+function randomBetween(min, max) {
+  return Math.random() * (max - min) + min;
 }
 
-function closeModal() {
-  if (!modal) return;
+function makeParticle(originX, originY, force) {
+  const angle = randomBetween(-Math.PI * 0.95, -Math.PI * 0.05);
+  const speed = randomBetween(3, 10) * force;
 
-  modal.classList.remove("is-open");
-  modal.setAttribute("aria-hidden", "true");
-  document.body.classList.remove("modal-open");
-
-  if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
-    lastFocusedElement.focus();
-  }
-}
-
-[
-  $("#surpriseButton"),
-  $("#letterSurprise"),
-  $("#finalSurprise")
-].forEach(button => on(button, "click", openModal));
-
-on(closeModalButton, "click", closeModal);
-
-on(modal, "click", event => {
-  if (event.target === modal) closeModal();
-});
-
-on(document, "keydown", event => {
-  if (!modal?.classList.contains("is-open")) return;
-
-  if (event.key === "Escape") {
-    closeModal();
-  }
-
-  // Keep keyboard focus inside the open dialog.
-  if (event.key === "Tab") {
-    const focusable = $$(
-      'button:not(:disabled), a[href], [tabindex]:not([tabindex="-1"])',
-      modal
-    ).filter(element => element.offsetParent !== null);
-
-    if (!focusable.length) return;
-
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
-    }
-  }
-});
-
-/* =========================================================
-   06 — CONFETTI
-   Canvas-based, bounded particle count; no external library.
-========================================================= */
-let confettiCanvas = null;
-let confettiCtx = null;
-let confettiRaf = 0;
-let confettiPieces = [];
-let confettiLastFrame = 0;
-
-function createConfettiCanvas() {
-  if (confettiCanvas) return;
-
-  confettiCanvas = document.createElement("canvas");
-  confettiCanvas.setAttribute("aria-hidden", "true");
-
-  Object.assign(confettiCanvas.style, {
-    position: "fixed",
-    inset: "0",
-    width: "100%",
-    height: "100%",
-    zIndex: "200",
-    pointerEvents: "none"
-  });
-
-  document.body.appendChild(confettiCanvas);
-  confettiCtx = confettiCanvas.getContext("2d");
-
-  const resize = () => {
-    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-    confettiCanvas.width = Math.round(window.innerWidth * dpr);
-    confettiCanvas.height = Math.round(window.innerHeight * dpr);
-    confettiCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  return {
+    x: originX,
+    y: originY,
+    vx: Math.cos(angle) * speed + randomBetween(-2, 2),
+    vy: Math.sin(angle) * speed,
+    gravity: randomBetween(0.09, 0.18),
+    width: randomBetween(4, 9),
+    height: randomBetween(5, 12),
+    rotation: randomBetween(0, Math.PI * 2),
+    rotationSpeed: randomBetween(-0.13, 0.13),
+    color: confettiColors[
+      Math.floor(Math.random() * confettiColors.length)
+    ],
+    opacity: 1,
+    decay: randomBetween(0.0025, 0.005),
+    sway: randomBetween(0.02, 0.08),
+    swayOffset: randomBetween(0, Math.PI * 2)
   };
-
-  resize();
-  on(window, "resize", resize, { passive: true });
 }
 
-function celebrate(amount = 80) {
-  if (prefersReducedMotion) return;
+function burstConfetti(amount = 100, originX, originY, force = 1) {
+  const x = originX ?? canvasWidth / 2;
+  const y = originY ?? canvasHeight * 0.42;
 
-  createConfettiCanvas();
-  if (!confettiCtx) return;
+  // Limit the particle count to keep older laptops responsive.
+  const safeAmount = Math.max(0, Math.min(amount, 420));
 
-  const colors = ["#d8bc82", "#f2e4bd", "#4d9a70", "#a4d8b4", "#ffffff"];
-  const count = Math.min(amount, 100);
-
-  for (let i = 0; i < count; i++) {
-    confettiPieces.push({
-      x: window.innerWidth * (.2 + Math.random() * .6),
-      y: window.innerHeight * .35,
-      vx: (Math.random() - .5) * 8,
-      vy: -Math.random() * 8 - 2,
-      gravity: .12 + Math.random() * .08,
-      size: 3 + Math.random() * 5,
-      rotation: Math.random() * 6,
-      spin: (Math.random() - .5) * .18,
-      life: 100 + Math.random() * 50,
-      color: colors[Math.floor(Math.random() * colors.length)]
-    });
+  for (let i = 0; i < safeAmount; i++) {
+    particles.push(makeParticle(x, y, force));
   }
 
-  // Keep repeated clicks from creating an unbounded animation.
-  confettiPieces = confettiPieces.slice(-260);
+  // Keep the canvas lightweight if the button is clicked repeatedly.
+  if (particles.length > 650) {
+    particles = particles.slice(-650);
+  }
 
-  if (!confettiRaf) {
-    confettiLastFrame = 0;
-    confettiRaf = requestAnimationFrame(drawConfetti);
+  if (animationFrame === null) {
+    lastFrameTime = 0;
+    animationFrame = requestAnimationFrame(drawConfetti);
   }
 }
 
 function drawConfetti(timestamp) {
-  confettiRaf = 0;
-
-  if (!confettiCtx || !confettiCanvas) return;
-
-  if (document.hidden) {
-    confettiPieces = [];
-    confettiCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+  // Cap the frame rate to reduce load on older hardware.
+  if (timestamp - lastFrameTime < 16) {
+    animationFrame = requestAnimationFrame(drawConfetti);
     return;
   }
 
-  if (timestamp - confettiLastFrame < 24) {
-    confettiRaf = requestAnimationFrame(drawConfetti);
-    return;
+  lastFrameTime = timestamp;
+  ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+  for (let i = particles.length - 1; i >= 0; i--) {
+    const p = particles[i];
+
+    p.vy += p.gravity;
+    p.x += p.vx + Math.sin(p.swayOffset) * p.sway;
+    p.y += p.vy;
+    p.rotation += p.rotationSpeed;
+    p.swayOffset += 0.04;
+    p.opacity -= p.decay;
+
+    ctx.save();
+    ctx.globalAlpha = Math.max(0, p.opacity);
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rotation);
+    ctx.fillStyle = p.color;
+    ctx.fillRect(
+      -p.width / 2,
+      -p.height / 2,
+      p.width,
+      p.height
+    );
+    ctx.restore();
+
+    if (p.y > canvasHeight + 30 || p.opacity <= 0) {
+      particles.splice(i, 1);
+    }
   }
-  confettiLastFrame = timestamp;
 
-  confettiCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-
-  confettiPieces = confettiPieces.filter(piece => piece.life > 0);
-
-  for (const piece of confettiPieces) {
-    piece.x += piece.vx;
-    piece.y += piece.vy;
-    piece.vy += piece.gravity;
-    piece.rotation += piece.spin;
-    piece.life--;
-
-    confettiCtx.save();
-    confettiCtx.translate(piece.x, piece.y);
-    confettiCtx.rotate(piece.rotation);
-    confettiCtx.globalAlpha = Math.min(1, piece.life / 25);
-    confettiCtx.fillStyle = piece.color;
-    confettiCtx.fillRect(-piece.size / 2, -piece.size / 2, piece.size, piece.size * .7);
-    confettiCtx.restore();
-  }
-
-  if (confettiPieces.length) {
-    confettiRaf = requestAnimationFrame(drawConfetti);
+  if (particles.length > 0) {
+    animationFrame = requestAnimationFrame(drawConfetti);
   } else {
-    confettiCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    animationFrame = null;
   }
 }
 
-on($("#celebrateButton"), "click", () => celebrate(100));
+/* Button celebration: two bursts, spaced out. */
 
-on($("#modalCelebrate"), "click", () => {
-  celebrate(100);
-  closeModal();
+let buttonCelebrationCount = 0;
+
+document.getElementById("celebrateButton").addEventListener("click", () => {
+  buttonCelebrationCount++;
+
+  burstConfetti(150, canvasWidth * 0.5, canvasHeight * 0.65, 1.1);
+
+  window.setTimeout(() => {
+    burstConfetti(90, canvasWidth * 0.22, canvasHeight * 0.7, 0.9);
+    burstConfetti(90, canvasWidth * 0.78, canvasHeight * 0.7, 0.9);
+  }, 220);
+
+  if (buttonCelebrationCount === 1) {
+    document.getElementById("celebrateButton").textContent =
+      "One more celebration? Click again";
+  }
 });
 
-/* =========================================================
-   07 — COPY LETTER
-========================================================= */
-on($("#copyLetter"), "click", async () => {
-  const status = $("#copyStatus");
-  const letter = $(".letter-shell");
+/* -----------------------------
+   MASSIVE CONFETTI AT PAGE END
+----------------------------- */
 
-  const textToCopy = [
-    "Dear Baba,",
-    "",
-    ...$$(".letter-copy p", letter).map(p => p.innerText),
-    "",
-    "Happy Birthday, Baba.",
-    "With all my love, from your son."
-  ].join("\n");
+let endConfettiTriggered = false;
 
-  try {
-    if (!navigator.clipboard || !window.isSecureContext) {
-      throw new Error("Clipboard unavailable");
-    }
+function checkPageEnd() {
+  if (endConfettiTriggered) return;
 
-    await navigator.clipboard.writeText(textToCopy);
-    if (status) status.textContent = "Your letter has been copied.";
-  } catch {
-    // Fallback for older browsers and restricted clipboard permissions.
-    const textarea = document.createElement("textarea");
-    textarea.value = textToCopy;
-    textarea.setAttribute("readonly", "");
-    Object.assign(textarea.style, {
-      position: "fixed",
-      opacity: "0",
-      left: "-9999px"
-    });
+  const scrollPosition = window.scrollY + window.innerHeight;
+  const pageHeight = document.documentElement.scrollHeight;
+  const distanceFromBottom = pageHeight - scrollPosition;
 
-    document.body.appendChild(textarea);
-    textarea.select();
+  if (distanceFromBottom <= 12) {
+    endConfettiTriggered = true;
 
-    let copied = false;
-    try {
-      copied = document.execCommand("copy");
-    } catch {
-      copied = false;
-    }
+    // A large burst, spread across the screen.
+    burstConfetti(260, canvasWidth * 0.5, canvasHeight * 0.58, 1.2);
 
-    textarea.remove();
+    window.setTimeout(() => {
+      burstConfetti(100, canvasWidth * 0.15, canvasHeight * 0.65, 0.95);
+      burstConfetti(100, canvasWidth * 0.85, canvasHeight * 0.65, 0.95);
+    }, 350);
 
-    if (status) {
-      status.textContent = copied
-        ? "Your letter has been copied."
-        : "Copy was blocked by the browser. You can select and copy the letter manually.";
+    const endingTitle = document.querySelector(".ending-title");
+
+    if (endingTitle) {
+      endingTitle.innerHTML =
+        'And the celebration is <span>all yours.</span>';
     }
   }
-});
-
-/* =========================================================
-   08 — MUSIC PLAYER
-   Uses the actual instrumental recording; no fake play button.
-========================================================= */
-const audio = $("#birthdayAudio");
-const musicPanel = $("#musicPanel");
-const musicStatus = $("#musicStatus");
-const musicButtons = $$("[data-music-toggle]");
-
-let musicLoading = false;
-
-function setMusicStatus(message, isError = false) {
-  if (!musicStatus) return;
-
-  musicStatus.textContent = message;
-  musicStatus.classList.toggle("error", isError);
 }
 
-function updateMusicUI() {
-  const playing = audio && !audio.paused && !audio.ended;
+window.addEventListener("scroll", checkPageEnd, { passive: true });
+window.addEventListener("resize", checkPageEnd, { passive: true });
 
-  musicPanel?.classList.toggle("is-playing", Boolean(playing));
-
-  musicButtons.forEach(button => {
-    const label = button.querySelector("[data-music-label]");
-    const icon = button.querySelector("[data-music-icon]");
-
-    if (label) label.textContent = playing ? "Pause music" : "Play music";
-    if (icon) icon.textContent = playing ? "Ⅱ" : "▶";
-
-    button.setAttribute(
-      "aria-label",
-      playing ? "Pause birthday music" : "Play birthday music"
-    );
-  });
-}
-
-async function toggleMusic() {
-  if (!audio || musicLoading) return;
-
-  if (!audio.paused) {
-    audio.pause();
-    return;
-  }
-
-  musicLoading = true;
-  musicButtons.forEach(button => button.disabled = true);
-  setMusicStatus("Loading the instrumental recording…");
-
-  try {
-    // Explicitly ask the browser to fetch the audio only on user action.
-    await audio.play();
-    setMusicStatus("Now playing · Happy Birthday instrumental");
-  } catch (error) {
-    console.warn("Birthday music could not start:", error);
-
-    setMusicStatus(
-      "Playback failed. Check your internet connection or try again.",
-      true
-    );
-  } finally {
-    musicLoading = false;
-    musicButtons.forEach(button => button.disabled = false);
-    updateMusicUI();
-  }
-}
-
-musicButtons.forEach(button => {
-  on(button, "click", toggleMusic);
-});
-
-on(audio, "play", () => {
-  updateMusicUI();
-  setMusicStatus("Now playing · Happy Birthday instrumental");
-});
-
-on(audio, "pause", () => {
-  updateMusicUI();
-
-  if (!audio.ended) {
-    setMusicStatus("Music paused.");
-  }
-});
-
-on(audio, "waiting", () => {
-  setMusicStatus("Buffering the music…");
-});
-
-on(audio, "error", () => {
-  updateMusicUI();
-  setMusicStatus(
-    "The audio source could not be loaded. Check your connection and try again.",
-    true
-  );
-});
-
-on(audio, "ended", () => {
-  updateMusicUI();
-  setMusicStatus("The birthday tune has finished.");
-});
-
-on(audio, "playing", () => {
-  updateMusicUI();
-  setMusicStatus("Now playing · Happy Birthday instrumental");
-});
-
-updateMusicUI();
-
-/* =========================================================
-   09 — NAVIGATION POLISH
-========================================================= */
-$$(".nav-links a").forEach(link => {
-  on(link, "click", () => {
-    const target = document.querySelector(link.getAttribute("href"));
-    if (!target) return;
-
-    // Allow native anchor navigation and browser history to work.
-    target.setAttribute("tabindex", "-1");
-  });
-});
-
-/* =========================================================
-   10 — INITIAL STATE
-========================================================= */
-document.documentElement.classList.add("js-ready");
-console.info("For Baba — birthday experience initialized.");
+// Also check after images, fonts, and layout changes have settled.
+window.addEventListener("load", checkPageEnd);
 </script>
+
 </body>
 </html>
