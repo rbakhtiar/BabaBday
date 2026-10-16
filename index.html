@@ -3,602 +3,2386 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#07100b">
-<title>For Baba — With Love</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#07130e">
+<meta name="description" content="A birthday surprise for Baba, made with love by his son.">
+<title>For Baba — A Birthday to Remember</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+/* =========================================================
+   01 — DESIGN TOKENS
+========================================================= */
 :root {
-  --bg:#07100b;
-  --panel:#0d1b12;
-  --green:#79dda1;
-  --gold:#ddc394;
-  --white:#f5f2e9;
-  --muted:#a6b2a7;
-  --line:rgba(221,195,148,.2);
-  --serif:'Alegreya',Georgia,serif;
-  --sans:'DM Sans',Arial,sans-serif;
+  color-scheme: dark;
+  --bg: #050b08;
+  --bg-soft: #09150f;
+  --panel: rgba(16, 34, 25, .76);
+  --panel-solid: #102219;
+  --green: #163d2b;
+  --green-bright: #4d9a70;
+  --green-light: #a4d8b4;
+  --gold: #d8bc82;
+  --gold-light: #f2e4bd;
+  --text: #f5f0e6;
+  --muted: #b0b8ae;
+  --line: rgba(216, 188, 130, .20);
+  --radius: 24px;
+  --serif: "Alegreya", Georgia, "Times New Roman", serif;
+  --sans: "DM Sans", Arial, sans-serif;
+  --content: 1120px;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --shadow: 0 24px 80px rgba(0, 0, 0, .30);
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:85px}
-body{margin:0;background:var(--bg);color:var(--white);font-family:var(--sans)}
-button{font:inherit}
-button:focus-visible,a:focus-visible{outline:2px solid var(--green);outline-offset:4px}
-::selection{background:var(--green);color:var(--bg)}
-#stars{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
-.site{position:relative;z-index:1}
-nav{position:fixed;z-index:10;inset:0 0 auto;padding:16px 7%;min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:15px;border-bottom:1px solid transparent;transition:.3s}
-nav.scrolled{background:rgba(7,16,11,.94);backdrop-filter:blur(14px);border-color:var(--line)}
-.brand{display:flex;align-items:center;gap:11px;text-decoration:none}
-.brand-icon{width:35px;height:35px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font:23px var(--serif)}
-.brand-name{font:600 21px var(--serif)}
-nav small{color:var(--muted);font-size:10px;letter-spacing:1.5px;text-transform:uppercase}
-section{padding:105px 7%}
-.hero{min-height:100svh;display:grid;place-items:center;text-align:center;position:relative;overflow:hidden;padding-top:130px}
-.orbit{position:absolute;width:min(75vw,650px);aspect-ratio:1;border:1px solid rgba(121,221,161,.08);border-radius:50%;animation:breathe 8s ease-in-out infinite alternate;pointer-events:none}
-.orbit:before,.orbit:after{content:"";position:absolute;inset:12%;border:1px solid rgba(221,195,148,.06);border-radius:50%}
-.orbit:after{inset:25%}
-.hero-content{position:relative;max-width:850px;animation:enter 1.2s ease both}
-.eyebrow{color:var(--gold);font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase}
-.hero h1{font:500 clamp(65px,11vw,120px)/.92 var(--serif);letter-spacing:-3px;margin:30px 0}
-.hero h1 em,.section-title em,.card-title em{display:block;color:var(--green);font-weight:400}
-.hero-copy{max-width:460px;margin:24px auto;color:#bbc5bc;font:16px/1.9 var(--serif)}
-.actions{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:30px}
-.btn{padding:14px 21px;min-height:46px;border:1px solid var(--line);border-radius:2px;background:transparent;color:var(--white);font-size:11px;font-weight:600;cursor:pointer;transition:transform .25s,border-color .25s,background .25s;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:10px}
-.btn:hover{transform:translateY(-2px);border-color:var(--gold)}
-.btn-primary{background:var(--green);color:#07130b;border-color:var(--green)}
-.btn-primary:hover{background:#9be9b7}
-.scroll{position:absolute;bottom:25px;left:50%;transform:translateX(-50%);font-size:9px;letter-spacing:3px;color:var(--muted);white-space:nowrap}
-.scroll:after{content:"";display:block;margin:12px auto;width:1px;height:25px;background:var(--gold);animation:scroll 1.5s infinite}
-.section-head{text-align:center;max-width:680px;margin:0 auto 45px}
-.section-head h2,.section-title{font:500 clamp(42px,6vw,68px)/1.05 var(--serif);letter-spacing:-1px;margin:19px 0}
-.section-head p{font-size:12px;line-height:1.9;color:var(--muted)}
-.letter-wrap{max-width:760px;margin:auto}
-.letter{padding:clamp(26px,6vw,65px);position:relative;overflow:hidden;border:1px solid var(--line);background:linear-gradient(140deg,#14291a,#09120c);box-shadow:0 25px 80px #0003}
-.letter:before{content:"“";position:absolute;top:-50px;left:15px;font:200px var(--serif);color:#ddc3940b}
-.letter-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:20px;color:var(--gold);font-size:9px;letter-spacing:2px;text-transform:uppercase}
-.letter h3{font:500 43px var(--serif);margin:28px 0 20px}
-.letter p{position:relative;color:#c5cec5;font:16px/2 var(--serif);margin:17px 0}
-.signature{margin-top:30px;color:var(--gold);font:italic 27px var(--serif)}
-.signature small{display:block;margin-top:8px;font:10px var(--sans);letter-spacing:2px;color:var(--muted)}
-.center{text-align:center}
-.music-panel{max-width:650px;margin:auto;padding:27px;border:1px solid var(--line);background:linear-gradient(140deg,#12251a,#09120c);display:flex;align-items:center;gap:20px}
-.music-disc{width:64px;height:64px;flex-shrink:0;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font:30px var(--serif)}
-.music-panel.playing .music-disc{animation:spin 12s linear infinite}
-.music-info{flex:1;min-width:0}
-.music-info h3{font:500 25px var(--serif);margin:0 0 5px}
-.music-info p{font-size:11px;color:var(--muted);line-height:1.7;margin:0}
-.music-btn{margin-left:auto;flex-shrink:0}
-.note{max-width:650px;margin:15px auto;color:var(--muted);font-size:10px;line-height:1.8;text-align:center}
-.grid{max-width:1000px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.value{padding:27px;border:1px solid var(--line);background:#ffffff04;transition:.3s}
-.value:hover{transform:translateY(-5px);border-color:#79dda166}
-.value small{color:var(--gold);letter-spacing:2px;font-size:9px}
-.value h3{font:500 30px var(--serif);margin:24px 0 10px}
-.value p{font-size:12px;color:var(--muted);line-height:1.9;margin:0}
-.timeline{max-width:690px;margin:auto}
-.event{padding:0 0 35px 34px;border-left:1px solid #ddc39455;margin-left:8px;position:relative}
-.event:last-child{padding-bottom:0}
-.event:before{content:"";position:absolute;left:-5px;top:5px;width:9px;height:9px;border-radius:50%;background:var(--bg);border:1px solid var(--gold)}
-.event small{font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase}
-.event h3{font:500 30px var(--serif);margin:8px 0}
-.event p{font-size:12px;line-height:1.9;color:var(--muted);max-width:500px}
-.envelope-area{max-width:680px;margin:auto;text-align:center}
-.envelope{position:relative;margin:30px auto 25px;width:min(100%,430px);height:265px;perspective:1000px;cursor:pointer;outline:none}
-.envelope-base{position:absolute;inset:0;background:linear-gradient(135deg,#173b26,#0d2114);border:1px solid #ddc39477;box-shadow:0 25px 65px #0005;overflow:hidden}
-.envelope-base:before,.envelope-base:after{content:"";position:absolute;bottom:0;width:0;height:0;border-style:solid;z-index:2}
-.envelope-base:before{left:0;border-width:0 0 180px 215px;border-color:transparent transparent #20442e transparent}
-.envelope-base:after{right:0;border-width:180px 0 0 215px;border-color:transparent transparent transparent #153521}
-.envelope-flap{position:absolute;z-index:4;top:0;left:0;width:0;height:0;border-style:solid;border-width:135px 215px 0;border-color:#31583b transparent transparent;transform-origin:top;transition:transform .8s cubic-bezier(.2,.7,.2,1);filter:drop-shadow(0 4px 4px #0002)}
-.seal{position:absolute;z-index:5;top:106px;left:50%;transform:translateX(-50%);width:52px;height:52px;border:1px solid #e7d3a4;border-radius:50%;display:grid;place-items:center;background:#173a25;color:var(--gold);font:28px var(--serif);transition:opacity .3s}
-.envelope-letter{position:absolute;z-index:3;left:8%;width:84%;top:15px;min-height:225px;padding:25px 17px;background:#f0e5cc;color:#233527;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform .8s cubic-bezier(.2,.7,.2,1);box-shadow:0 5px 15px #0002}
-.envelope-letter span{font-size:9px;letter-spacing:3px;text-transform:uppercase}
-.envelope-letter strong{font:500 38px var(--serif);margin:10px 0}
-.envelope-letter em{font:italic 15px var(--serif)}
-.envelope.open .envelope-flap{transform:rotateX(180deg);z-index:1}
-.envelope.open .envelope-letter{transform:translateY(-95px);transition-delay:.3s}
-.envelope.open .seal{opacity:0}
-.envelope-help{font-size:11px;color:var(--muted);line-height:1.8}
-.surprise-message{display:none;max-width:610px;margin:35px auto 0;padding:30px;border:1px solid var(--line);background:#ffffff04;animation:enter .7s ease both}
-.surprise-message.show{display:block}
-.surprise-message h3{font:500 39px var(--serif);margin:10px 0 18px}
-.surprise-message h3 em{color:var(--green)}
-.surprise-message p{font:16px/1.9 var(--serif);color:#c4cec5}
-.card{max-width:720px;margin:auto;padding:55px 20px;border:1px solid #ddc39466;text-align:center;background:radial-gradient(ellipse at center,#173823,#08110b 75%);position:relative}
-.card:before{content:"";position:absolute;inset:10px;border:1px solid #ddc39422;pointer-events:none}
-.card-title{font:500 clamp(44px,7vw,73px)/1 var(--serif);margin:24px 0}
-.card p{font:italic 17px/1.8 var(--serif);color:var(--muted)}
-.wish{max-width:720px;margin:auto;text-align:center;padding:45px 15px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.wish h2{font:500 clamp(50px,9vw,90px)/.95 var(--serif);margin:22px 0}
-.wish h2 em{color:var(--gold)}
-.wish p{max-width:430px;margin:20px auto 30px;color:var(--muted);font:16px/1.9 var(--serif)}
-footer{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;padding:24px 7%;border-top:1px solid var(--line);font-size:10px;color:var(--muted);letter-spacing:.6px}
-footer strong{color:var(--gold);font-weight:500}
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s,transform .7s}
-.reveal.visible{opacity:1;transform:none}
-.modal{position:fixed;inset:0;z-index:50;background:#030905f5;backdrop-filter:blur(14px);display:grid;place-items:center;padding:20px;opacity:0;visibility:hidden;transition:.35s}
-.modal.open{opacity:1;visibility:visible}
-.modal-box{max-width:560px;width:100%;text-align:center;padding:40px 25px;border:1px solid var(--line);background:radial-gradient(ellipse,#183923,#08110b 75%);transform:translateY(15px);transition:.35s}
-.modal.open .modal-box{transform:translateY(0)}
-.modal-box h2{font:500 clamp(48px,8vw,78px)/1 var(--serif);margin:25px 0}
-.modal-box h2 em{color:var(--green)}
-.modal-box p{font:16px/1.9 var(--serif);color:#c5cec5}
-.modal-star{color:var(--gold);font:42px var(--serif)}
-.confetti{position:fixed;z-index:60;top:-20px;pointer-events:none;animation:fall linear forwards}
-@keyframes enter{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-@keyframes breathe{from{transform:scale(.95);opacity:.4}to{transform:scale(1.05);opacity:.9}}
-@keyframes scroll{0%,100%{transform:scaleY(.5);opacity:.4}50%{transform:scaleY(1);opacity:1}}
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes fall{to{transform:translateY(110vh) rotate(500deg);opacity:0}}
-@media(max-width:700px){
- nav{padding:12px 5%}.nav-caption{display:none}
- section{padding:80px 6%}
- .hero h1{letter-spacing:-1.5px}
- .grid{grid-template-columns:1fr}
- .value{padding:23px}
- .music-panel{padding:18px;gap:12px;flex-wrap:wrap}
- .music-disc{width:48px;height:48px}
- .music-info h3{font-size:21px}
- .music-btn{margin-left:0}
- .envelope{height:230px}
- .envelope-flap{border-width:115px 50% 0}
- .envelope-base:before{border-width:0 0 155px 50vw}
- .envelope-base:after{border-width:155px 0 0 50vw}
- .envelope-letter{min-height:195px}
- .envelope.open .envelope-letter{transform:translateY(-75px)}
- footer{justify-content:center;text-align:center}
+
+/* =========================================================
+   02 — RESET & BASE
+========================================================= */
+*, *::before, *::after {
+  box-sizing: border-box;
 }
-@media(prefers-reduced-motion:reduce){
- *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
- .reveal{opacity:1;transform:none}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+  scrollbar-color: #35674a #07100b;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(ellipse at 50% -15%, rgba(43, 104, 69, .22), transparent 54%),
+    var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button, input {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 5px;
+}
+
+button:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+}
+
+::selection {
+  color: #07130e;
+  background: var(--gold);
+}
+
+img, svg, canvas {
+  max-width: 100%;
+}
+
+canvas {
+  pointer-events: none;
+}
+
+.container {
+  width: min(var(--content), calc(100% - 48px));
+  margin-inline: auto;
+}
+
+.section {
+  position: relative;
+  padding: 112px 0;
+}
+
+.section-heading {
+  max-width: 670px;
+  margin: 0 auto 52px;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before,
+.eyebrow::after {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: currentColor;
+  opacity: .7;
+}
+
+h1, h2, h3, p {
+  margin-top: 0;
+}
+
+h1, h2, h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  line-height: 1.12;
+}
+
+h2 {
+  margin: 18px 0;
+  font-size: clamp(2.5rem, 5vw, 4.4rem);
+  letter-spacing: -.035em;
+}
+
+.section-heading p {
+  max-width: 520px;
+  margin: 0 auto;
+  color: var(--muted);
+}
+
+.gold-text {
+  color: var(--gold-light);
+  font-style: italic;
+}
+
+.rule {
+  width: 74px;
+  height: 1px;
+  margin: 24px auto;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* =========================================================
+   03 — AMBIENT BACKGROUND
+========================================================= */
+.ambient {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ambient::before,
+.ambient::after {
+  content: "";
+  position: absolute;
+  width: 44vw;
+  height: 44vw;
+  min-width: 300px;
+  min-height: 300px;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: .11;
+  animation: ambient-drift 18s ease-in-out infinite alternate;
+}
+
+.ambient::before {
+  top: 8%;
+  left: -24%;
+  background: #237548;
+}
+
+.ambient::after {
+  right: -24%;
+  bottom: 4%;
+  background: #a27c35;
+  animation-delay: -8s;
+}
+
+#particleCanvas {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: .65;
+}
+
+main, header, footer, .modal {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes ambient-drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(8%, -6%, 0) scale(1.16); }
+}
+
+/* =========================================================
+   04 — NAVIGATION
+========================================================= */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 1px solid rgba(255,255,255,.055);
+  background: rgba(5, 11, 8, .78);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.nav {
+  min-height: 74px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.brand-mark {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(216,188,130,.55);
+  border-radius: 50%;
+  color: var(--gold);
+  font-family: var(--serif);
+  font-size: 20px;
+}
+
+.brand-copy {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.brand-copy strong {
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 500;
+}
+
+.brand-copy small {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-links a {
+  color: #c2c9c0;
+  font-size: 12px;
+  transition: color .2s ease;
+}
+
+.nav-links a:hover {
+  color: var(--gold-light);
+}
+
+.nav-music {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 15px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  background: rgba(255,255,255,.025);
+  cursor: pointer;
+  transition: background .25s ease, border-color .25s ease;
+}
+
+.nav-music:hover {
+  background: rgba(216,188,130,.09);
+  border-color: rgba(216,188,130,.55);
+}
+
+.music-icon {
+  color: var(--gold);
+  font-size: 15px;
+}
+
+/* =========================================================
+   05 — HERO
+========================================================= */
+.hero {
+  min-height: min(820px, calc(100svh - 74px));
+  min-height: min(820px, calc(100vh - 74px));
+  display: grid;
+  align-items: center;
+  padding: 90px 0 100px;
+  text-align: center;
+}
+
+.hero-inner {
+  width: min(900px, calc(100% - 36px));
+  margin-inline: auto;
+}
+
+.hero-overline {
+  margin-bottom: 26px;
+  animation: rise-in .9s var(--ease) both;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(4.2rem, 12vw, 9.5rem);
+  letter-spacing: -.065em;
+  line-height: .92;
+  animation: rise-in 1s .08s var(--ease) both;
+}
+
+.hero h1 span {
+  display: block;
+  margin-top: 13px;
+  color: var(--gold-light);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.hero-subtitle {
+  max-width: 510px;
+  margin: 30px auto 0;
+  color: #c0c8bd;
+  font-family: var(--serif);
+  font-size: clamp(19px, 2.5vw, 25px);
+  animation: rise-in 1s .18s var(--ease) both;
+}
+
+.hero-date {
+  margin-top: 25px;
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  animation: rise-in 1s .25s var(--ease) both;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 13px;
+  margin-top: 35px;
+  animation: rise-in 1s .32s var(--ease) both;
+}
+
+.btn {
+  min-height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 24px;
+  border: 1px solid transparent;
+  border-radius: 99px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .025em;
+  transition: transform .25s var(--ease), background .25s ease,
+              border-color .25s ease, box-shadow .25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+}
+
+.btn-primary {
+  color: #102016;
+  background: linear-gradient(135deg, #f0dfb0, #c4a76b);
+  box-shadow: 0 8px 30px rgba(200,169,103,.12);
+}
+
+.btn-primary:hover {
+  background: #f6e8c4;
+  box-shadow: 0 12px 36px rgba(200,169,103,.22);
+}
+
+.btn-secondary {
+  border-color: var(--line);
+  background: rgba(255,255,255,.025);
+}
+
+.btn-secondary:hover {
+  border-color: rgba(216,188,130,.6);
+  background: rgba(216,188,130,.07);
+}
+
+.hero-note {
+  margin-top: 56px;
+  color: #87958a;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 42px;
+  margin: 13px auto 0;
+  background: linear-gradient(var(--gold), transparent);
+  animation: scroll-glow 2s ease-in-out infinite;
+}
+
+@keyframes scroll-glow {
+  0%, 100% { opacity: .35; transform: scaleY(.7); }
+  50% { opacity: 1; transform: scaleY(1); }
+}
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================================
+   06 — OPENING MESSAGE
+========================================================= */
+.message-section {
+  padding-top: 45px;
+}
+
+.message-card {
+  position: relative;
+  max-width: 870px;
+  margin: 0 auto;
+  padding: clamp(30px, 6vw, 70px);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(66,127,83,.16), transparent 55%),
+    linear-gradient(135deg, rgba(17,39,27,.92), rgba(8,19,13,.96));
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.message-card::before {
+  content: "“";
+  position: absolute;
+  top: -32px;
+  left: 18px;
+  color: rgba(216,188,130,.11);
+  font-family: var(--serif);
+  font-size: 180px;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.message-card h2 {
+  position: relative;
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+}
+
+.message-card p {
+  position: relative;
+  max-width: 610px;
+  margin: 0 auto;
+  color: #c5cdc2;
+  font-family: var(--serif);
+  font-size: clamp(18px, 2.2vw, 23px);
+  line-height: 1.9;
+}
+
+.signature {
+  margin-top: 26px;
+  color: var(--gold);
+  font-family: var(--serif);
+  font-size: 23px;
+  font-style: italic;
+}
+
+/* =========================================================
+   07 — VALUES / REASONS
+========================================================= */
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 17px;
+}
+
+.value-card {
+  min-height: 235px;
+  padding: 30px 25px;
+  border: 1px solid rgba(255,255,255,.075);
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(20,42,29,.74), rgba(8,17,12,.72));
+  transition: transform .35s var(--ease), border-color .35s ease,
+              background .35s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(216,188,130,.36);
+  background: linear-gradient(145deg, rgba(29,57,39,.85), rgba(8,17,12,.85));
+}
+
+.value-number {
+  color: var(--gold);
+  font-family: var(--serif);
+  font-size: 17px;
+}
+
+.value-card h3 {
+  margin: 24px 0 10px;
+  font-size: 29px;
+}
+
+.value-card p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+/* =========================================================
+   08 — MEMORY TIMELINE
+========================================================= */
+.timeline {
+  position: relative;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(transparent, rgba(216,188,130,.55), rgba(77,154,112,.45), transparent);
+}
+
+.timeline-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 36px 1fr;
+  align-items: start;
+  gap: 18px;
+  margin-bottom: 36px;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-dot {
+  position: relative;
+  z-index: 1;
+  width: 13px;
+  height: 13px;
+  justify-self: center;
+  margin-top: 7px;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  background: var(--bg);
+  box-shadow: 0 0 0 5px rgba(216,188,130,.08);
+}
+
+.timeline-content {
+  padding: 24px;
+  border: 1px solid rgba(255,255,255,.075);
+  border-radius: 18px;
+  background: rgba(13,29,20,.72);
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+  grid-column: 1;
+  grid-row: 1;
+  text-align: right;
+}
+
+.timeline-item:nth-child(odd) .timeline-dot {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.timeline-item:nth-child(even) .timeline-dot {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.timeline-content small {
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+}
+
+.timeline-content h3 {
+  margin: 9px 0;
+  font-size: 27px;
+}
+
+.timeline-content p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* =========================================================
+   09 — THE LETTER
+========================================================= */
+.letter-section {
+  padding-top: 90px;
+}
+
+.letter-shell {
+  max-width: 790px;
+  margin: 0 auto;
+  padding: clamp(25px, 6vw, 64px);
+  border: 1px solid rgba(216,188,130,.3);
+  border-radius: 5px;
+  background:
+    linear-gradient(135deg, rgba(23,45,31,.95), rgba(10,22,15,.98));
+  box-shadow: 0 30px 100px rgba(0,0,0,.25);
+}
+
+.letter-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--line);
+  color: var(--gold);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.letter-shell h2 {
+  margin: 35px 0 24px;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+}
+
+.letter-copy {
+  color: #d2d8ce;
+  font-family: var(--serif);
+  font-size: clamp(17px, 2.1vw, 20px);
+  line-height: 1.95;
+}
+
+.letter-copy p {
+  margin-bottom: 22px;
+}
+
+.letter-copy strong {
+  color: var(--gold-light);
+  font-weight: 500;
+}
+
+.letter-signoff {
+  margin-top: 32px;
+  color: var(--gold-light);
+  font-family: var(--serif);
+  font-size: 25px;
+  font-style: italic;
+}
+
+.letter-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+/* =========================================================
+   10 — INTERACTIVE ENVELOPE
+========================================================= */
+.envelope-section {
+  padding-top: 50px;
+  text-align: center;
+}
+
+.envelope-wrap {
+  width: min(430px, 100%);
+  margin: 38px auto 0;
+  perspective: 1100px;
+}
+
+.envelope-button {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-align: center;
+}
+
+.envelope {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.45;
+  overflow: hidden;
+  border: 1px solid rgba(216,188,130,.38);
+  border-radius: 8px;
+  background: linear-gradient(140deg, #183b28, #0d2116);
+  box-shadow: 0 25px 65px rgba(0,0,0,.35);
+  isolation: isolate;
+}
+
+.envelope::before,
+.envelope::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  pointer-events: none;
+}
+
+.envelope::before {
+  background: linear-gradient(145deg, transparent 49.5%, rgba(216,188,130,.16) 50%, transparent 50.5%);
+}
+
+.envelope::after {
+  background: linear-gradient(215deg, transparent 49.5%, rgba(216,188,130,.12) 50%, transparent 50.5%);
+}
+
+.envelope-flap {
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 57%;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  background: linear-gradient(160deg, #2c6544, #163b28);
+  transform-origin: top center;
+  transition: transform .8s var(--ease), opacity .6s ease;
+}
+
+.envelope-seal {
+  position: absolute;
+  z-index: 5;
+  top: 42%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border: 1px solid rgba(242,228,189,.72);
+  border-radius: 50%;
+  color: var(--gold-light);
+  background: radial-gradient(circle at 30% 25%, #a27c46, #664923);
+  box-shadow: 0 5px 20px rgba(0,0,0,.25);
+  transform: translate(-50%, -50%);
+  transition: opacity .4s ease, transform .5s var(--ease);
+}
+
+.envelope-label {
+  position: absolute;
+  z-index: 1;
+  top: 65%;
+  left: 0;
+  width: 100%;
+  padding: 0 12px;
+  color: var(--gold-light);
+  font-family: var(--serif);
+  font-size: clamp(24px, 5vw, 33px);
+}
+
+.envelope-prompt {
+  display: block;
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: .08em;
+}
+
+.envelope-button[aria-expanded="true"] .envelope-flap {
+  transform: rotateX(180deg);
+  opacity: .45;
+}
+
+.envelope-button[aria-expanded="true"] .envelope-seal {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(.5);
+}
+
+.secret-message {
+  display: none;
+  margin: 26px auto 0;
+  padding: 25px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(16,34,25,.8);
+  animation: rise-in .6s var(--ease) both;
+}
+
+.secret-message.is-open {
+  display: block;
+}
+
+.secret-message p {
+  margin: 0;
+  color: var(--gold-light);
+  font-family: var(--serif);
+  font-size: clamp(20px, 3vw, 27px);
+  line-height: 1.7;
+}
+
+/* =========================================================
+   11 — BIRTHDAY CARD
+========================================================= */
+.card-section {
+  padding-top: 60px;
+}
+
+.birthday-card {
+  position: relative;
+  max-width: 790px;
+  margin: 0 auto;
+  padding: clamp(32px, 7vw, 78px);
+  overflow: hidden;
+  border: 1px solid rgba(216,188,130,.38);
+  border-radius: 6px;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(80,132,84,.25), transparent 65%),
+    linear-gradient(150deg, #10271a, #07120c);
+  text-align: center;
+}
+
+.birthday-card::before,
+.birthday-card::after {
+  content: "✦";
+  position: absolute;
+  color: rgba(216,188,130,.35);
+  font-size: 40px;
+}
+
+.birthday-card::before {
+  top: 18px;
+  left: 22px;
+}
+
+.birthday-card::after {
+  right: 22px;
+  bottom: 18px;
+}
+
+.card-small {
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+}
+
+.birthday-card h2 {
+  margin: 22px 0;
+  font-size: clamp(3rem, 8vw, 6rem);
+}
+
+.birthday-card p {
+  max-width: 500px;
+  margin: 0 auto;
+  color: #c5cfc3;
+  font-family: var(--serif);
+  font-size: 20px;
+}
+
+.card-signature {
+  margin-top: 26px;
+  color: var(--gold-light);
+  font-family: var(--serif);
+  font-size: 24px;
+  font-style: italic;
+}
+
+/* =========================================================
+   12 — CLASSICAL / INSTRUMENTAL MUSIC PLAYER
+========================================================= */
+.music-panel {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 26px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 20px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(15,32,22,.85);
+}
+
+.music-art {
+  width: 68px;
+  height: 68px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(216,188,130,.4);
+  border-radius: 14px;
+  background: linear-gradient(145deg, #284d34, #0c1c12);
+  color: var(--gold-light);
+  font-family: var(--serif);
+  font-size: 28px;
+}
+
+.music-info h3 {
+  margin: 0 0 3px;
+  font-size: 25px;
+}
+
+.music-info p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.music-status {
+  margin-top: 7px !important;
+  color: var(--green-light) !important;
+}
+
+.music-status.error {
+  color: #efb5a8 !important;
+}
+
+.music-toggle {
+  width: 49px;
+  height: 49px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(216,188,130,.5);
+  border-radius: 50%;
+  color: #101c13;
+  background: var(--gold-light);
+  cursor: pointer;
+  font-size: 18px;
+  transition: transform .25s ease, background .25s ease;
+}
+
+.music-toggle:hover {
+  transform: scale(1.06);
+  background: white;
+}
+
+.music-toggle:disabled {
+  cursor: wait;
+}
+
+.music-footnote {
+  margin: 14px 0 0;
+  color: #7f8e81;
+  font-size: 10px;
+  text-align: center;
+}
+
+.equalizer {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  height: 16px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.equalizer span {
+  width: 3px;
+  height: 5px;
+  border-radius: 5px;
+  background: var(--green-light);
+}
+
+.music-panel.is-playing .equalizer span {
+  animation: equalize .55s ease-in-out infinite alternate;
+}
+
+.music-panel.is-playing .equalizer span:nth-child(2) {
+  animation-delay: -.25s;
+}
+
+.music-panel.is-playing .equalizer span:nth-child(3) {
+  animation-delay: -.4s;
+}
+
+@keyframes equalize {
+  from { height: 4px; }
+  to { height: 15px; }
+}
+
+/* =========================================================
+   13 — FINAL SECTION & FOOTER
+========================================================= */
+.final-section {
+  padding-bottom: 125px;
+  text-align: center;
+}
+
+.final-section h2 {
+  max-width: 800px;
+  margin-inline: auto;
+  font-size: clamp(2.7rem, 7vw, 5.5rem);
+}
+
+.final-section p {
+  max-width: 520px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-family: var(--serif);
+  font-size: 20px;
+}
+
+.final-section .btn {
+  margin-top: 28px;
+}
+
+.site-footer {
+  padding: 26px 0;
+  border-top: 1px solid rgba(255,255,255,.07);
+  background: rgba(0,0,0,.15);
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer-inner p {
+  margin: 0;
+  color: #859187;
+  font-size: 10px;
+}
+
+.footer-brand {
+  color: var(--gold);
+  font-family: var(--serif);
+  font-size: 17px;
+}
+
+/* =========================================================
+   14 — SURPRISE MODAL
+========================================================= */
+.modal {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  background: rgba(2,7,4,.84);
+  backdrop-filter: blur(13px);
+  -webkit-backdrop-filter: blur(13px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .3s ease, visibility .3s ease;
+}
+
+.modal.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.modal-dialog {
+  position: relative;
+  width: min(560px, 100%);
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: clamp(30px, 7vw, 62px);
+  border: 1px solid rgba(216,188,130,.4);
+  border-radius: 22px;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(61,112,69,.24), transparent 65%),
+    #0b1910;
+  box-shadow: 0 30px 120px rgba(0,0,0,.5);
+  text-align: center;
+  transform: translateY(18px) scale(.98);
+  transition: transform .4s var(--ease);
+}
+
+.modal.is-open .modal-dialog {
+  transform: translateY(0) scale(1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 13px;
+  right: 13px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: rgba(255,255,255,.04);
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.modal-symbol {
+  color: var(--gold);
+  font-size: 32px;
+}
+
+.modal-dialog h2 {
+  margin: 15px 0;
+  font-size: clamp(2.5rem, 7vw, 4rem);
+}
+
+.modal-dialog p {
+  color: #c4cec2;
+  font-family: var(--serif);
+  font-size: 20px;
+  line-height: 1.8;
+}
+
+.modal-signature {
+  color: var(--gold-light);
+  font-family: var(--serif);
+  font-size: 24px;
+  font-style: italic;
+}
+
+/* =========================================================
+   15 — SCROLL REVEALS
+========================================================= */
+.js-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .75s var(--ease), transform .75s var(--ease);
+}
+
+.js-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.js-reveal.is-visible .value-card {
+  animation: rise-in .65s var(--ease) both;
+}
+
+.js-reveal.is-visible .value-card:nth-child(2) {
+  animation-delay: .1s;
+}
+
+.js-reveal.is-visible .value-card:nth-child(3) {
+  animation-delay: .2s;
+}
+
+/* =========================================================
+   16 — RESPONSIVE LAYOUT
+========================================================= */
+@media (min-width: 1400px) {
+  .hero {
+    min-height: 780px;
+  }
+}
+
+@media (max-width: 800px) {
+  .section {
+    padding: 85px 0;
+  }
+
+  .nav {
+    min-height: 66px;
+  }
+
+  .nav-links {
+    gap: 16px;
+  }
+
+  .nav-links a {
+    font-size: 11px;
+  }
+
+  .nav-music {
+    padding-inline: 11px;
+  }
+
+  .values-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .value-card:last-child {
+    grid-column: 1 / -1;
+    min-height: 190px;
+  }
+
+  .hero {
+    min-height: 680px;
+    min-height: min(760px, calc(100vh - 66px));
+  }
+}
+
+@media (max-width: 560px) {
+  .container {
+    width: calc(100% - 32px);
+  }
+
+  .section {
+    padding: 70px 0;
+  }
+
+  .section-heading {
+    margin-bottom: 35px;
+  }
+
+  .nav {
+    flex-wrap: wrap;
+    padding: 10px 0;
+    gap: 8px;
+  }
+
+  .brand-mark {
+    width: 33px;
+    height: 33px;
+  }
+
+  .brand-copy strong {
+    font-size: 17px;
+  }
+
+  .brand-copy small {
+    font-size: 8px;
+  }
+
+  .nav-links {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: clamp(14px, 5vw, 27px);
+    padding-top: 7px;
+  }
+
+  .nav-links a {
+    font-size: 10px;
+  }
+
+  .nav-music {
+    min-height: 35px;
+    font-size: 10px;
+  }
+
+  .hero {
+    min-height: 650px;
+    min-height: min(720px, calc(100svh - 105px));
+    padding: 75px 0;
+  }
+
+  .hero h1 {
+    font-size: clamp(4rem, 17vw, 6.6rem);
+  }
+
+  .hero-subtitle {
+    font-size: 19px;
+  }
+
+  .hero-note {
+    margin-top: 40px;
+  }
+
+  .message-card {
+    padding: 35px 23px;
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .value-card,
+  .value-card:last-child {
+    grid-column: auto;
+    min-height: auto;
+    padding: 25px;
+  }
+
+  .value-card h3 {
+    margin-top: 14px;
+  }
+
+  .timeline::before {
+    left: 7px;
+  }
+
+  .timeline-item {
+    grid-template-columns: 16px minmax(0, 1fr);
+    gap: 13px;
+    margin-bottom: 18px;
+  }
+
+  .timeline-dot,
+  .timeline-item:nth-child(odd) .timeline-dot,
+  .timeline-item:nth-child(even) .timeline-dot {
+    grid-column: 1;
+    grid-row: 1;
+    margin-top: 7px;
+  }
+
+  .timeline-content,
+  .timeline-item:nth-child(odd) .timeline-content,
+  .timeline-item:nth-child(even) .timeline-content {
+    grid-column: 2;
+    grid-row: 1;
+    padding: 22px;
+    text-align: left;
+  }
+
+  .letter-shell {
+    padding: 26px 22px;
+  }
+
+  .letter-top {
+    font-size: 8px;
+    letter-spacing: .1em;
+  }
+
+  .letter-copy {
+    font-size: 18px;
+  }
+
+  .letter-actions {
+    flex-direction: column;
+  }
+
+  .letter-actions .btn {
+    width: 100%;
+  }
+
+  .music-panel {
+    grid-template-columns: auto 1fr;
+    gap: 14px;
+    padding: 18px;
+  }
+
+  .music-art {
+    width: 52px;
+    height: 52px;
+  }
+
+  .music-info h3 {
+    font-size: 21px;
+  }
+
+  .music-toggle {
+    grid-column: 1 / -1;
+    width: 100%;
+    height: 44px;
+    border-radius: 99px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* =========================================================
+   17 — ACCESSIBILITY / MOTION
+========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+
+  #particleCanvas {
+    display: none;
+  }
+
+  .js-reveal {
+    opacity: 1;
+    transform: none;
+  }
 }
 </style>
 </head>
 
 <body>
-<canvas id="stars" aria-hidden="true"></canvas>
+<div class="ambient" aria-hidden="true"></div>
+<canvas id="particleCanvas" aria-hidden="true"></canvas>
 
-<div class="site">
-<nav id="nav">
-  <a class="brand" href="#home">
-    <span class="brand-icon">B</span>
-    <span class="brand-name">For Baba.</span>
-  </a>
-  <small class="nav-caption">Made by his son</small>
-</nav>
+<header class="site-header">
+  <nav class="nav container" aria-label="Main navigation">
+    <a class="brand" href="#home" aria-label="For Baba, home">
+      <span class="brand-mark">B</span>
+      <span class="brand-copy">
+        <strong>For Baba</strong>
+        <small>A letter from your son</small>
+      </span>
+    </a>
+
+    <div class="nav-links">
+      <a href="#memories">Memories</a>
+      <a href="#letter">The Letter</a>
+      <a href="#surprise">Surprise</a>
+    </div>
+
+    <button class="nav-music" type="button" data-music-toggle>
+      <span class="music-icon" aria-hidden="true">♫</span>
+      <span data-music-label>Play music</span>
+    </button>
+  </nav>
+</header>
 
 <main>
-<section class="hero" id="home">
-  <div class="orbit" aria-hidden="true"></div>
-  <div class="hero-content">
-    <div class="eyebrow">15 October · A day for you</div>
-    <h1>For the man<br>who means <em>everything.</em></h1>
-    <p class="hero-copy">
-      A little creation, made with gratitude for the man who
-      works hard for us, encourages our dreams, and makes
-      our world a happier place.
-    </p>
-    <div class="actions">
-      <button class="btn btn-primary" id="startSurprise">Open your surprise ↗</button>
-      <a class="btn" href="#letter">Read your letter</a>
-    </div>
-  </div>
-  <div class="scroll">THERE IS MORE BELOW</div>
-</section>
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-inner">
+      <div class="hero-overline eyebrow">A little something, just for you</div>
 
-<section id="letter">
-  <div class="section-head reveal">
-    <div class="eyebrow">A letter from your son</div>
-    <h2 class="section-title">Dear Baba,<em>this is for you.</em></h2>
-    <p>Not a copied greeting. A personal message, made especially for you.</p>
-  </div>
+      <h1>
+        Happy Birthday
+        <span>Baba.</span>
+      </h1>
 
-  <div class="letter-wrap reveal">
-    <article class="letter">
-      <div class="letter-top">
-        <span>For Baba, with love</span>
-        <span>15 · 10 · 2026</span>
+      <p class="hero-subtitle">
+        For the man who inspires me to dream bigger,
+        work harder, and become a better person.
+      </p>
+
+      <div class="hero-date">15 October · A day worth celebrating</div>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#letter">
+          Read your letter <span aria-hidden="true">↗</span>
+        </a>
+        <button class="btn btn-secondary" type="button" id="surpriseButton">
+          Reveal your surprise <span aria-hidden="true">✦</span>
+        </button>
       </div>
-      <h3>Dear Baba,</h3>
-      <p>
-        You work so hard for us, encourage us to follow our dreams,
-        and make us feel happy. I might not always say it, but I
-        notice what you do, and I appreciate it more than you know.
-      </p>
-      <p>
-        You are my role model. I admire how smart and caring you are,
-        and how hard you work. You teach me that there is value in
-        trying your best, learning new things, and looking after
-        the people who matter.
-      </p>
-      <p>
-        I will always remember our trips to Dubai and Lahore, and
-        celebrating your other birthdays together. Those experiences
-        are part of our story, and I hope we make many more memories
-        in the years ahead.
-      </p>
-      <p>
-        I love how you enjoy cars, AI, technology, and travelling.
-        You inspire me to explore ideas, build things of my own,
-        and imagine what might be possible in the future.
-      </p>
-      <p>
-        I made this website because I wanted to give you something
-        that came from me. It is a little reminder that the work you
-        do, the encouragement you give, and the happiness you bring
-        to our lives do not go unnoticed.
-      </p>
-      <p>
-        Happy Birthday, Baba. I wish you happiness, good health,
-        exciting journeys, and many wonderful years ahead.
-      </p>
-      <div class="signature">With love and appreciation,<small>YOUR SON</small></div>
-    </article>
-  </div>
-</section>
 
-<section id="music">
-  <div class="section-head reveal">
-    <div class="eyebrow">A moment of calm</div>
-    <h2 class="section-title">A little classical <em>elegance.</em></h2>
-    <p>Let the birthday experience unfold to the sound of Bach's timeless piano music.</p>
-  </div>
-
-  <div class="music-panel reveal" id="musicPanel">
-    <div class="music-disc" aria-hidden="true">♫</div>
-    <div class="music-info">
-      <h3>Prelude in C Major</h3>
-      <p>J. S. Bach · BWV 846 · Piano</p>
-      <p id="musicStatus">Ready to play · Recording loads from Wikimedia Commons</p>
+      <div class="hero-note">Made with love · From your son</div>
+      <div class="scroll-line" aria-hidden="true"></div>
     </div>
-    <button class="btn btn-primary music-btn" id="musicToggle">▶ Play music</button>
-  </div>
-  <p class="note">Music requires an internet connection. Playback starts only when you press play.</p>
-  <audio id="classicalAudio" preload="none" loop>
-    <source src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Kimiko_Ishizaka_-_Bach_-_Well-Tempered_Clavier,_Book_1_-_01_Prelude_No._1_in_C_major,_BWV_846.ogg" type="audio/ogg">
-  </audio>
-</section>
+  </section>
 
-<section id="admiration">
-  <div class="section-head reveal">
-    <div class="eyebrow">Why you inspire me</div>
-    <h2 class="section-title">Three things I <em>look up to.</em></h2>
-  </div>
-  <div class="grid">
-    <article class="value reveal">
-      <small>01 · YOUR EXAMPLE</small>
-      <h3>Role model</h3>
-      <p>You inspire me to keep learning, follow my ideas, and become a better person.</p>
-    </article>
-    <article class="value reveal">
-      <small>02 · YOUR HEART</small>
-      <h3>Caring</h3>
-      <p>Thank you for encouraging us, looking after us, and helping us feel happy.</p>
-    </article>
-    <article class="value reveal">
-      <small>03 · YOUR EFFORT</small>
-      <h3>Hardworking</h3>
-      <p>Your dedication reminds me that meaningful things take effort and commitment.</p>
-    </article>
-  </div>
-</section>
-
-<section id="memories">
-  <div class="section-head reveal">
-    <div class="eyebrow">Our memories</div>
-    <h2 class="section-title">Places, moments, <em>and stories.</em></h2>
-    <p>Some memories are special simply because we experienced them together.</p>
-  </div>
-  <div class="timeline">
-    <article class="event reveal">
-      <small>A journey together</small>
-      <h3>Dubai</h3>
-      <p>A journey that became part of our shared memories. Here's to the places we've explored and those still ahead.</p>
-    </article>
-    <article class="event reveal">
-      <small>Another destination</small>
-      <h3>Lahore</h3>
-      <p>Another chapter in our travels together, remembered as part of our story.</p>
-    </article>
-    <article class="event reveal">
-      <small>Celebrating you</small>
-      <h3>Your birthdays</h3>
-      <p>Every birthday is another chance to celebrate you and make new memories together.</p>
-    </article>
-    <article class="event reveal">
-      <small>The next chapter</small>
-      <h3>More adventures ahead</h3>
-      <p>More places to visit, more technology to explore, and more wonderful moments to share.</p>
-    </article>
-  </div>
-</section>
-
-<section id="surprise">
-  <div class="section-head reveal">
-    <div class="eyebrow">Something special awaits</div>
-    <h2 class="section-title">A surprise, <em>just for Baba.</em></h2>
-    <p>There's a little more to this birthday gift. Open the envelope to find out.</p>
-  </div>
-
-  <div class="envelope-area reveal">
-    <div class="envelope" id="envelope" role="button" tabindex="0"
-      aria-label="Open Baba's birthday envelope" aria-expanded="false">
-      <div class="envelope-base"></div>
-      <div class="envelope-letter">
-        <span>A little note for you</span>
-        <strong>Dear Baba</strong>
-        <em>Something from my heart...</em>
+  <!-- PERSONAL MESSAGE -->
+  <section class="section message-section">
+    <div class="container">
+      <div class="message-card js-reveal">
+        <span class="eyebrow">A few words from the heart</span>
+        <h2>Some people inspire you.<br><span class="gold-text">You do both.</span></h2>
+        <div class="rule"></div>
+        <p>
+          You work hard, encourage us to chase our dreams,
+          and always find ways to make us feel happy.
+          I hope you know how much that means to me.
+          Today, I want to celebrate not just your birthday,
+          but the incredible person you are.
+        </p>
+        <div class="signature">With love, always.</div>
       </div>
-      <div class="envelope-flap"></div>
-      <div class="seal" aria-hidden="true">B</div>
     </div>
-    <p class="envelope-help" id="envelopeHelp">Tap the envelope to open your surprise.</p>
+  </section>
 
-    <div class="surprise-message" id="surpriseMessage" aria-live="polite">
-      <div class="eyebrow">The message inside</div>
-      <h3>Happy Birthday, <em>Baba.</em></h3>
-      <p>
-        I want you to know that I appreciate you. Thank you for
-        working hard for us, believing in us, encouraging our dreams,
-        and making us happy.
-      </p>
-      <p>
-        You are someone I look up to, and I am proud to be your son.
-        No website could ever express everything, but I hope this
-        little one reminds you how much you mean to me.
-      </p>
-      <p>Here's to many more birthdays, journeys, and memories together.</p>
-      <button class="btn btn-primary" id="celebrate">Celebrate Baba ✦</button>
+  <!-- REASONS -->
+  <section class="section" id="why">
+    <div class="container">
+      <div class="section-heading js-reveal">
+        <span class="eyebrow">What makes you, you</span>
+        <h2>My everyday <span class="gold-text">inspiration.</span></h2>
+        <p>Three things I admire about you — and a thousand more I could never fit on one page.</p>
+      </div>
+
+      <div class="values-grid js-reveal">
+        <article class="value-card">
+          <span class="value-number">01 / The example</span>
+          <h3>My role model.</h3>
+          <p>You show me that actions matter, that effort counts, and that I can keep learning every day.</p>
+        </article>
+
+        <article class="value-card">
+          <span class="value-number">02 / The mind</span>
+          <h3>Brilliantly smart.</h3>
+          <p>I love how you think, solve problems, and help me see possibilities I hadn't considered.</p>
+        </article>
+
+        <article class="value-card">
+          <span class="value-number">03 / The heart</span>
+          <h3>Always caring.</h3>
+          <p>Behind all the hard work is a dad who wants the people he loves to feel supported and happy.</p>
+        </article>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="card">
-  <div class="section-head reveal">
-    <div class="eyebrow">A birthday card to keep</div>
-    <h2 class="section-title">Made with care. <em>Made for you.</em></h2>
-  </div>
-  <article class="card reveal">
-    <div class="eyebrow">15 October 2026</div>
-    <h3 class="card-title">Happy Birthday,<em>Baba.</em></h3>
-    <p>Thank you for everything you do for us.</p>
-    <button class="btn btn-primary" id="cardSurprise">Open birthday greeting ↗</button>
-  </article>
-</section>
+  <!-- MEMORIES -->
+  <section class="section" id="memories">
+    <div class="container">
+      <div class="section-heading js-reveal">
+        <span class="eyebrow">Our little collection</span>
+        <h2>Moments worth <span class="gold-text">keeping.</span></h2>
+        <p>Not every memory needs a photograph. Some stay with you because of how they made you feel.</p>
+      </div>
 
-<section id="wish">
-  <div class="wish reveal">
-    <div class="eyebrow">One last wish</div>
-    <h2>Here's to you,<br><em>Baba.</em></h2>
-    <p>May the year ahead bring you happiness, good health, exciting travels, new discoveries, and countless reasons to smile.</p>
-    <button class="btn btn-primary" id="finalSurprise">One final surprise ✦</button>
-  </div>
-</section>
+      <div class="timeline js-reveal">
+        <article class="timeline-item">
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="timeline-content">
+            <small>A city of wonder</small>
+            <h3>Dubai</h3>
+            <p>A trip together, new sights to discover, and memories I get to carry with me.</p>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="timeline-content">
+            <small>Another chapter</small>
+            <h3>Lahore</h3>
+            <p>Another journey to remember — because the best part of travelling is who you share it with.</p>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="timeline-content">
+            <small>Every celebration</small>
+            <h3>Your birthdays</h3>
+            <p>All the birthdays we've celebrated, each one another reason to be thankful for you.</p>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="timeline-content">
+            <small>Still to come</small>
+            <h3>More adventures</h3>
+            <p>More places to explore, more conversations about cars and AI, and plenty of stories still to make.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- LETTER -->
+  <section class="section letter-section" id="letter">
+    <div class="container">
+      <div class="section-heading js-reveal">
+        <span class="eyebrow">Please read this</span>
+        <h2>A letter for <span class="gold-text">Baba.</span></h2>
+        <p>No fancy words can say everything. But these are the words I wanted you to have.</p>
+      </div>
+
+      <article class="letter-shell js-reveal">
+        <div class="letter-top">
+          <span>For Baba, with love</span>
+          <span>15 · 10 · 2026</span>
+        </div>
+
+        <h2>Dear Baba,</h2>
+
+        <div class="letter-copy">
+          <p>
+            Happy Birthday! Today is your day, and I wanted to make
+            something special that comes from me — something that
+            reminds you how much you mean to me.
+          </p>
+
+          <p>
+            Thank you for working so hard for us, for encouraging us,
+            and for always finding ways to make us happy. I know that
+            being a dad takes effort, patience, and care, and I want
+            you to know that I appreciate everything you do.
+          </p>
+
+          <p>
+            You're my role model. I admire how smart you are, how
+            hard you work, and how much you care about the people
+            around you. You make me want to learn more, build things,
+            dream bigger, and keep improving myself.
+          </p>
+
+          <p>
+            I'll always treasure our trips to <strong>Dubai</strong>
+            and <strong>Lahore</strong>, our birthday celebrations,
+            and all the little moments that make our memories special.
+            I look forward to many more adventures with you — whether
+            we're travelling somewhere new or talking about cars and
+            the latest AI technology.
+          </p>
+
+          <p>
+            I hope this next year brings you happiness, good health,
+            exciting adventures, and plenty of reasons to smile.
+            You deserve to feel as appreciated as you make the rest
+            of us feel.
+          </p>
+
+          <p>
+            Thank you for being you, Baba. I might not always say
+            everything out loud, but I am grateful to have you as my dad.
+          </p>
+        </div>
+
+        <div class="letter-signoff">Happy Birthday, Baba.</div>
+        <p style="margin:8px 0 0;color:var(--muted);font-size:12px">
+          With all my love, from your son.
+        </p>
+
+        <div class="letter-actions">
+          <button class="btn btn-primary" type="button" id="letterSurprise">
+            Open the birthday surprise ✦
+          </button>
+          <button class="btn btn-secondary" type="button" id="copyLetter">
+            Copy this letter
+          </button>
+        </div>
+        <p id="copyStatus" role="status" aria-live="polite" style="margin:12px 0 0;color:var(--muted);font-size:12px"></p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ENVELOPE -->
+  <section class="section envelope-section" id="surprise">
+    <div class="container">
+      <div class="section-heading js-reveal">
+        <span class="eyebrow">One last little secret</span>
+        <h2>Something <span class="gold-text">just for you.</span></h2>
+        <p>There is one more message waiting for you. Open it whenever you're ready.</p>
+      </div>
+
+      <div class="envelope-wrap js-reveal">
+        <button class="envelope-button" id="envelopeButton"
+          type="button" aria-expanded="false" aria-controls="secretMessage"
+          aria-label="Open the birthday envelope">
+          <span class="envelope" aria-hidden="true">
+            <span class="envelope-flap"></span>
+            <span class="envelope-seal">B</span>
+            <span class="envelope-label">For Baba</span>
+          </span>
+          <span class="envelope-prompt" id="envelopePrompt">TAP TO OPEN YOUR LETTER</span>
+        </button>
+
+        <div class="secret-message" id="secretMessage" aria-live="polite">
+          <p>
+            Baba, whatever I build or achieve in life,
+            I hope I always make you proud.
+            Thank you for believing in me and giving me
+            reasons to believe in myself.
+            <br><br>
+            <span class="gold-text">You're one of my greatest gifts.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIGITAL CARD -->
+  <section class="section card-section">
+    <div class="container">
+      <div class="birthday-card js-reveal">
+        <div class="card-small">A little birthday card, made by hand</div>
+        <h2>Happy Birthday,<br><span class="gold-text">Baba.</span></h2>
+        <div class="rule"></div>
+        <p>
+          To more happiness, more adventures, more dreams coming true,
+          and more wonderful years ahead.
+        </p>
+        <div class="card-signature">Love, your son.</div>
+        <button class="btn btn-primary" type="button" id="celebrateButton" style="margin-top:28px">
+          Celebrate! ✦
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MUSIC -->
+  <section class="section" id="music">
+    <div class="container">
+      <div class="section-heading js-reveal">
+        <span class="eyebrow">A birthday soundtrack</span>
+        <h2>Press play, <span class="gold-text">Baba.</span></h2>
+        <p>A synthesized instrumental version of the classic birthday tune, just for the occasion.</p>
+      </div>
+
+      <div class="music-panel js-reveal" id="musicPanel">
+        <div class="music-art" aria-hidden="true">♫</div>
+
+        <div class="music-info">
+          <h3>Happy Birthday</h3>
+          <p>Instrumental · Synthesized melody</p>
+          <p class="music-status" id="musicStatus" role="status" aria-live="polite">
+            Ready when you are.
+          </p>
+          <span class="equalizer" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </span>
+        </div>
+
+        <button class="music-toggle" type="button" id="musicToggle"
+          aria-label="Play birthday music" data-music-toggle>
+          <span data-music-icon aria-hidden="true">▶</span>
+        </button>
+      </div>
+
+      <p class="music-footnote">
+        Music requires an internet connection. Playback begins only when you press play.
+      </p>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="section final-section">
+    <div class="container js-reveal">
+      <span class="eyebrow">Before you go</span>
+      <h2>Some things are too important to leave <span class="gold-text">unsaid.</span></h2>
+      <p>
+        You're appreciated more than you know, Baba.
+        Happy Birthday — here's to everything wonderful still ahead.
+      </p>
+      <button class="btn btn-primary" type="button" id="finalSurprise">
+        One more surprise ✦
+      </button>
+    </div>
+  </section>
 </main>
 
-<footer>
-  <span>MADE WITH CARE · <strong>JUST FOR BABA</strong></span>
-  <span>15 October 2026 · From your son</span>
+<footer class="site-footer">
+  <div class="footer-inner container">
+    <span class="footer-brand">For Baba.</span>
+    <p>Made with love, thought, and a little bit of code.</p>
+    <p>15 October 2026</p>
+  </div>
 </footer>
-</div>
 
-<div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTitle">
-  <div class="modal-box">
-    <div class="modal-star">✳</div>
-    <div class="eyebrow">A message from your son</div>
-    <h2 id="modalTitle">Happy Birthday,<em>Baba.</em></h2>
-    <p>Thank you for being my role model, for working hard for us, and for encouraging us to dream big.</p>
-    <p>I hope this little gift makes you smile today and reminds you how much I appreciate you.</p>
-    <button class="btn btn-primary" id="closeModal">Back to your birthday</button>
+<!-- SURPRISE MODAL -->
+<div class="modal" id="birthdayModal" role="dialog"
+  aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+  <div class="modal-dialog">
+    <button class="modal-close" type="button" id="closeModal"
+      aria-label="Close surprise">×</button>
+    <div class="modal-symbol" aria-hidden="true">✦</div>
+    <span class="eyebrow">Made especially for you</span>
+    <h2 id="modalTitle">Happy Birthday,<br><span class="gold-text">Baba.</span></h2>
+    <div class="rule"></div>
+    <p>
+      My biggest wish is that you stay happy, feel loved,
+      and know how much you mean to me.
+      Thank you for being my dad, my role model,
+      and someone I can always look up to.
+    </p>
+    <div class="modal-signature">Love you, Baba.</div>
+    <button class="btn btn-primary" type="button" id="modalCelebrate" style="margin-top:24px">
+      Celebrate this moment ✦
+    </button>
   </div>
 </div>
 
+<!-- Public-domain synthesized instrumental recording.
+     The audio source is loaded only when playback is requested. -->
+<audio id="birthdayAudio" preload="none" loop>
+  <source
+    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Happy_Birthday_to_You.ogg"
+    type="audio/ogg">
+</audio>
+
 <script>
-(() => {
-  const $ = id => document.getElementById(id);
-  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+"use strict";
 
-  // Sticky navigation
-  const nav = $('nav');
-  addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', scrollY > 25);
-  }, {passive:true});
+/* =========================================================
+   01 — UTILITIES & SAFE EVENT HELPERS
+========================================================= */
+const $ = (selector, root = document) => root.querySelector(selector);
+const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
-  // Scroll reveal
-  const revealItems = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window && !reducedMotion) {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {threshold:.12});
-    revealItems.forEach(el => observer.observe(el));
-  } else {
-    revealItems.forEach(el => el.classList.add('visible'));
+const prefersReducedMotion =
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function on(element, eventName, callback, options) {
+  if (element) {
+    element.addEventListener(eventName, callback, options);
+  }
+}
+
+/* =========================================================
+   02 — SCROLL REVEALS
+========================================================= */
+function initReveals() {
+  const elements = $$(".js-reveal");
+
+  if (!("IntersectionObserver" in window) || prefersReducedMotion) {
+    elements.forEach(element => element.classList.add("is-visible"));
+    return;
   }
 
-  // Low-cost ambient particles
-  const canvas = $('stars');
-  const ctx = canvas.getContext('2d');
-  let width, height, particles = [], frame = 0;
+  const observer = new IntersectionObserver((entries, instance) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+
+      entry.target.classList.add("is-visible");
+      instance.unobserve(entry.target);
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: "0px 0px -35px 0px"
+  });
+
+  elements.forEach(element => observer.observe(element));
+}
+
+initReveals();
+
+/* =========================================================
+   03 — PARTICLE BACKGROUND
+   Lightweight canvas; pauses when the page is hidden.
+========================================================= */
+function initParticles() {
+  const canvas = $("#particleCanvas");
+  if (!canvas || prefersReducedMotion) return;
+
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  let width = 0;
+  let height = 0;
+  let particles = [];
+  let raf = 0;
+  let lastFrame = 0;
+
+  const maxParticles = 38;
+  const rand = (min, max) => min + Math.random() * (max - min);
 
   function resize() {
-    const dpr = Math.min(devicePixelRatio || 1, 1.5);
-    width = innerWidth;
-    height = innerHeight;
-    canvas.width = width * dpr;
-    canvas.height = height * dpr;
-    canvas.style.width = width + 'px';
-    canvas.style.height = height + 'px';
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-    particles = Array.from({length:reducedMotion?0:Math.min(28,Math.floor(width/30))},()=>({
-      x:Math.random()*width,y:Math.random()*height,
-      r:Math.random()*1.3+.3,s:Math.random()*.2+.05,
-      a:Math.random()*.4+.08
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+
+    width = window.innerWidth;
+    height = window.innerHeight;
+
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const count = Math.min(maxParticles, Math.floor(width / 24));
+    particles = Array.from({ length: count }, () => ({
+      x: rand(0, width),
+      y: rand(0, height),
+      radius: rand(.6, 1.8),
+      speed: rand(5, 15),
+      drift: rand(-3, 3),
+      alpha: rand(.12, .55)
     }));
   }
 
-  function draw() {
-    ctx.clearRect(0,0,width,height);
-    particles.forEach(p => {
-      p.y -= p.s;
-      if (p.y < 0) {p.y=height;p.x=Math.random()*width;}
-      ctx.beginPath();
-      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle=`rgba(121,221,161,${p.a})`;
-      ctx.fill();
-    });
-    if (!reducedMotion) frame=requestAnimationFrame(draw);
-  }
+  function draw(timestamp) {
+    raf = 0;
 
-  resize();
-  draw();
-  let resizeTimer;
-  addEventListener('resize',()=>{
-    cancelAnimationFrame(frame);
-    clearTimeout(resizeTimer);
-    resizeTimer=setTimeout(()=>{resize();draw();},150);
-  },{passive:true});
+    if (document.hidden) return;
 
-  // Genuine classical recording
-  const audio = $('classicalAudio');
-  const musicBtn = $('musicToggle');
-  const musicPanel = $('musicPanel');
-  const musicStatus = $('musicStatus');
-
-  musicBtn.addEventListener('click', async () => {
-    if (!audio.paused) {
-      audio.pause();
+    // Limit the particle animation to approximately 30 frames per second.
+    if (timestamp - lastFrame < 32) {
+      raf = requestAnimationFrame(draw);
       return;
     }
+    lastFrame = timestamp;
 
-    musicStatus.textContent = 'Loading classical piano recording…';
-    musicBtn.disabled = true;
+    ctx.clearRect(0, 0, width, height);
 
-    try {
-      await audio.play();
-    } catch (err) {
-      musicStatus.textContent = 'Could not load audio. Check your internet connection and try again.';
-      musicBtn.textContent = '↻ Try again';
-    } finally {
-      musicBtn.disabled = false;
-    }
-  });
+    for (const particle of particles) {
+      particle.y -= particle.speed * .032;
+      particle.x += particle.drift * .032;
 
-  audio.addEventListener('playing',()=>{
-    musicBtn.textContent='Ⅱ Pause music';
-    musicStatus.textContent='Now playing · Bach, Prelude in C Major';
-    musicPanel.classList.add('playing');
-  });
-
-  audio.addEventListener('pause',()=>{
-    musicBtn.textContent='▶ Play music';
-    musicStatus.textContent='Paused · Bach, Prelude in C Major';
-    musicPanel.classList.remove('playing');
-  });
-
-  audio.addEventListener('error',()=>{
-    musicStatus.textContent='The recording is unavailable. Check your connection and reload the page.';
-    musicBtn.textContent='↻ Try again';
-  });
-
-  // Interactive envelope
-  const envelope = $('envelope');
-  const surpriseMessage = $('surpriseMessage');
-
-  function openEnvelope() {
-    if (envelope.classList.contains('open')) return;
-    envelope.classList.add('open');
-    envelope.setAttribute('aria-expanded','true');
-    $('envelopeHelp').textContent='Your message has been revealed.';
-    setTimeout(()=>{
-      surpriseMessage.classList.add('show');
-      surpriseMessage.scrollIntoView({
-        behavior:reducedMotion?'auto':'smooth',
-        block:'nearest'
-      });
-    }, reducedMotion ? 0 : 650);
-    celebrate();
-  }
-
-  envelope.addEventListener('click',openEnvelope);
-  envelope.addEventListener('keydown',e=>{
-    if(e.key==='Enter'||e.key===' '){
-      e.preventDefault();
-      openEnvelope();
-    }
-  });
-
-  // Birthday celebration
-  function celebrate() {
-    if(reducedMotion) return;
-    const symbols=['✦','✧','·','✳'];
-    const fragment=document.createDocumentFragment();
-
-    for(let i=0;i<35;i++){
-      const el=document.createElement('span');
-      el.className='confetti';
-      el.textContent=symbols[Math.floor(Math.random()*symbols.length)];
-      el.style.left=Math.random()*100+'vw';
-      el.style.color=Math.random()>.5?'#79dda1':'#ddc394';
-      el.style.fontSize=(10+Math.random()*12)+'px';
-      el.style.animationDuration=(2.5+Math.random()*2.5)+'s';
-      el.addEventListener('animationend',()=>el.remove());
-      fragment.appendChild(el);
-    }
-    document.body.appendChild(fragment);
-  }
-
-  $('celebrate').addEventListener('click',celebrate);
-
-  // Accessible birthday modal
-  const modal=$('modal');
-  let previousFocus=null;
-
-  function openModal() {
-    previousFocus=document.activeElement;
-    modal.classList.add('open');
-    modal.setAttribute('aria-hidden','false');
-    document.body.style.overflow='hidden';
-    $('closeModal').focus();
-    celebrate();
-  }
-
-  function closeModal() {
-    modal.classList.remove('open');
-    modal.setAttribute('aria-hidden','true');
-    document.body.style.overflow='';
-    if(previousFocus) previousFocus.focus();
-  }
-
-  $('startSurprise').addEventListener('click',openModal);
-  $('cardSurprise').addEventListener('click',openModal);
-  $('finalSurprise').addEventListener('click',openModal);
-  $('closeModal').addEventListener('click',closeModal);
-
-  modal.addEventListener('click',e=>{
-    if(e.target===modal) closeModal();
-  });
-
-  document.addEventListener('keydown',e=>{
-    if(e.key==='Escape'&&modal.classList.contains('open')) closeModal();
-    if(e.key==='Tab'&&modal.classList.contains('open')){
-      const buttons=modal.querySelectorAll('button');
-      const first=buttons[0],last=buttons[buttons.length-1];
-      if(e.shiftKey&&document.activeElement===first){
-        e.preventDefault();last.focus();
-      } else if(!e.shiftKey&&document.activeElement===last){
-        e.preventDefault();first.focus();
+      if (particle.y < -5) {
+        particle.y = height + 5;
+        particle.x = rand(0, width);
       }
+
+      if (particle.x < -5) particle.x = width + 5;
+      if (particle.x > width + 5) particle.x = -5;
+
+      ctx.beginPath();
+      ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(216,188,130,${particle.alpha})`;
+      ctx.fill();
+    }
+
+    raf = requestAnimationFrame(draw);
+  }
+
+  function start() {
+    if (!raf && !document.hidden) {
+      raf = requestAnimationFrame(draw);
+    }
+  }
+
+  function stop() {
+    if (raf) cancelAnimationFrame(raf);
+    raf = 0;
+  }
+
+  let resizeTimer;
+  on(window, "resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(resize, 120);
+  }, { passive: true });
+
+  on(document, "visibilitychange", () => {
+    if (document.hidden) {
+      stop();
+    } else {
+      lastFrame = 0;
+      start();
     }
   });
-})();
+
+  resize();
+  start();
+}
+
+initParticles();
+
+/* =========================================================
+   04 — ENVELOPE REVEAL
+========================================================= */
+const envelopeButton = $("#envelopeButton");
+const secretMessage = $("#secretMessage");
+const envelopePrompt = $("#envelopePrompt");
+
+on(envelopeButton, "click", () => {
+  const isOpen = envelopeButton.getAttribute("aria-expanded") === "true";
+  const nextState = !isOpen;
+
+  envelopeButton.setAttribute("aria-expanded", String(nextState));
+  envelopeButton.setAttribute(
+    "aria-label",
+    nextState ? "Close the birthday envelope" : "Open the birthday envelope"
+  );
+
+  secretMessage.classList.toggle("is-open", nextState);
+
+  if (envelopePrompt) {
+    envelopePrompt.textContent = nextState
+      ? "YOUR SECRET MESSAGE IS OPEN"
+      : "TAP TO OPEN YOUR LETTER";
+  }
+
+  if (nextState) {
+    celebrate(65);
+  }
+});
+
+/* =========================================================
+   05 — SURPRISE MODAL
+========================================================= */
+const modal = $("#birthdayModal");
+const closeModalButton = $("#closeModal");
+let lastFocusedElement = null;
+
+function openModal() {
+  if (!modal) return;
+
+  lastFocusedElement = document.activeElement;
+
+  modal.classList.add("is-open");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-open");
+
+  closeModalButton?.focus();
+
+  celebrate(55);
+}
+
+function closeModal() {
+  if (!modal) return;
+
+  modal.classList.remove("is-open");
+  modal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("modal-open");
+
+  if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+    lastFocusedElement.focus();
+  }
+}
+
+[
+  $("#surpriseButton"),
+  $("#letterSurprise"),
+  $("#finalSurprise")
+].forEach(button => on(button, "click", openModal));
+
+on(closeModalButton, "click", closeModal);
+
+on(modal, "click", event => {
+  if (event.target === modal) closeModal();
+});
+
+on(document, "keydown", event => {
+  if (!modal?.classList.contains("is-open")) return;
+
+  if (event.key === "Escape") {
+    closeModal();
+  }
+
+  // Keep keyboard focus inside the open dialog.
+  if (event.key === "Tab") {
+    const focusable = $$(
+      'button:not(:disabled), a[href], [tabindex]:not([tabindex="-1"])',
+      modal
+    ).filter(element => element.offsetParent !== null);
+
+    if (!focusable.length) return;
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
+});
+
+/* =========================================================
+   06 — CONFETTI
+   Canvas-based, bounded particle count; no external library.
+========================================================= */
+let confettiCanvas = null;
+let confettiCtx = null;
+let confettiRaf = 0;
+let confettiPieces = [];
+let confettiLastFrame = 0;
+
+function createConfettiCanvas() {
+  if (confettiCanvas) return;
+
+  confettiCanvas = document.createElement("canvas");
+  confettiCanvas.setAttribute("aria-hidden", "true");
+
+  Object.assign(confettiCanvas.style, {
+    position: "fixed",
+    inset: "0",
+    width: "100%",
+    height: "100%",
+    zIndex: "200",
+    pointerEvents: "none"
+  });
+
+  document.body.appendChild(confettiCanvas);
+  confettiCtx = confettiCanvas.getContext("2d");
+
+  const resize = () => {
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    confettiCanvas.width = Math.round(window.innerWidth * dpr);
+    confettiCanvas.height = Math.round(window.innerHeight * dpr);
+    confettiCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  };
+
+  resize();
+  on(window, "resize", resize, { passive: true });
+}
+
+function celebrate(amount = 80) {
+  if (prefersReducedMotion) return;
+
+  createConfettiCanvas();
+  if (!confettiCtx) return;
+
+  const colors = ["#d8bc82", "#f2e4bd", "#4d9a70", "#a4d8b4", "#ffffff"];
+  const count = Math.min(amount, 100);
+
+  for (let i = 0; i < count; i++) {
+    confettiPieces.push({
+      x: window.innerWidth * (.2 + Math.random() * .6),
+      y: window.innerHeight * .35,
+      vx: (Math.random() - .5) * 8,
+      vy: -Math.random() * 8 - 2,
+      gravity: .12 + Math.random() * .08,
+      size: 3 + Math.random() * 5,
+      rotation: Math.random() * 6,
+      spin: (Math.random() - .5) * .18,
+      life: 100 + Math.random() * 50,
+      color: colors[Math.floor(Math.random() * colors.length)]
+    });
+  }
+
+  // Keep repeated clicks from creating an unbounded animation.
+  confettiPieces = confettiPieces.slice(-260);
+
+  if (!confettiRaf) {
+    confettiLastFrame = 0;
+    confettiRaf = requestAnimationFrame(drawConfetti);
+  }
+}
+
+function drawConfetti(timestamp) {
+  confettiRaf = 0;
+
+  if (!confettiCtx || !confettiCanvas) return;
+
+  if (document.hidden) {
+    confettiPieces = [];
+    confettiCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    return;
+  }
+
+  if (timestamp - confettiLastFrame < 24) {
+    confettiRaf = requestAnimationFrame(drawConfetti);
+    return;
+  }
+  confettiLastFrame = timestamp;
+
+  confettiCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+  confettiPieces = confettiPieces.filter(piece => piece.life > 0);
+
+  for (const piece of confettiPieces) {
+    piece.x += piece.vx;
+    piece.y += piece.vy;
+    piece.vy += piece.gravity;
+    piece.rotation += piece.spin;
+    piece.life--;
+
+    confettiCtx.save();
+    confettiCtx.translate(piece.x, piece.y);
+    confettiCtx.rotate(piece.rotation);
+    confettiCtx.globalAlpha = Math.min(1, piece.life / 25);
+    confettiCtx.fillStyle = piece.color;
+    confettiCtx.fillRect(-piece.size / 2, -piece.size / 2, piece.size, piece.size * .7);
+    confettiCtx.restore();
+  }
+
+  if (confettiPieces.length) {
+    confettiRaf = requestAnimationFrame(drawConfetti);
+  } else {
+    confettiCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+  }
+}
+
+on($("#celebrateButton"), "click", () => celebrate(100));
+
+on($("#modalCelebrate"), "click", () => {
+  celebrate(100);
+  closeModal();
+});
+
+/* =========================================================
+   07 — COPY LETTER
+========================================================= */
+on($("#copyLetter"), "click", async () => {
+  const status = $("#copyStatus");
+  const letter = $(".letter-shell");
+
+  const textToCopy = [
+    "Dear Baba,",
+    "",
+    ...$$(".letter-copy p", letter).map(p => p.innerText),
+    "",
+    "Happy Birthday, Baba.",
+    "With all my love, from your son."
+  ].join("\n");
+
+  try {
+    if (!navigator.clipboard || !window.isSecureContext) {
+      throw new Error("Clipboard unavailable");
+    }
+
+    await navigator.clipboard.writeText(textToCopy);
+    if (status) status.textContent = "Your letter has been copied.";
+  } catch {
+    // Fallback for older browsers and restricted clipboard permissions.
+    const textarea = document.createElement("textarea");
+    textarea.value = textToCopy;
+    textarea.setAttribute("readonly", "");
+    Object.assign(textarea.style, {
+      position: "fixed",
+      opacity: "0",
+      left: "-9999px"
+    });
+
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    let copied = false;
+    try {
+      copied = document.execCommand("copy");
+    } catch {
+      copied = false;
+    }
+
+    textarea.remove();
+
+    if (status) {
+      status.textContent = copied
+        ? "Your letter has been copied."
+        : "Copy was blocked by the browser. You can select and copy the letter manually.";
+    }
+  }
+});
+
+/* =========================================================
+   08 — MUSIC PLAYER
+   Uses the actual instrumental recording; no fake play button.
+========================================================= */
+const audio = $("#birthdayAudio");
+const musicPanel = $("#musicPanel");
+const musicStatus = $("#musicStatus");
+const musicButtons = $$("[data-music-toggle]");
+
+let musicLoading = false;
+
+function setMusicStatus(message, isError = false) {
+  if (!musicStatus) return;
+
+  musicStatus.textContent = message;
+  musicStatus.classList.toggle("error", isError);
+}
+
+function updateMusicUI() {
+  const playing = audio && !audio.paused && !audio.ended;
+
+  musicPanel?.classList.toggle("is-playing", Boolean(playing));
+
+  musicButtons.forEach(button => {
+    const label = button.querySelector("[data-music-label]");
+    const icon = button.querySelector("[data-music-icon]");
+
+    if (label) label.textContent = playing ? "Pause music" : "Play music";
+    if (icon) icon.textContent = playing ? "Ⅱ" : "▶";
+
+    button.setAttribute(
+      "aria-label",
+      playing ? "Pause birthday music" : "Play birthday music"
+    );
+  });
+}
+
+async function toggleMusic() {
+  if (!audio || musicLoading) return;
+
+  if (!audio.paused) {
+    audio.pause();
+    return;
+  }
+
+  musicLoading = true;
+  musicButtons.forEach(button => button.disabled = true);
+  setMusicStatus("Loading the instrumental recording…");
+
+  try {
+    // Explicitly ask the browser to fetch the audio only on user action.
+    await audio.play();
+    setMusicStatus("Now playing · Happy Birthday instrumental");
+  } catch (error) {
+    console.warn("Birthday music could not start:", error);
+
+    setMusicStatus(
+      "Playback failed. Check your internet connection or try again.",
+      true
+    );
+  } finally {
+    musicLoading = false;
+    musicButtons.forEach(button => button.disabled = false);
+    updateMusicUI();
+  }
+}
+
+musicButtons.forEach(button => {
+  on(button, "click", toggleMusic);
+});
+
+on(audio, "play", () => {
+  updateMusicUI();
+  setMusicStatus("Now playing · Happy Birthday instrumental");
+});
+
+on(audio, "pause", () => {
+  updateMusicUI();
+
+  if (!audio.ended) {
+    setMusicStatus("Music paused.");
+  }
+});
+
+on(audio, "waiting", () => {
+  setMusicStatus("Buffering the music…");
+});
+
+on(audio, "error", () => {
+  updateMusicUI();
+  setMusicStatus(
+    "The audio source could not be loaded. Check your connection and try again.",
+    true
+  );
+});
+
+on(audio, "ended", () => {
+  updateMusicUI();
+  setMusicStatus("The birthday tune has finished.");
+});
+
+on(audio, "playing", () => {
+  updateMusicUI();
+  setMusicStatus("Now playing · Happy Birthday instrumental");
+});
+
+updateMusicUI();
+
+/* =========================================================
+   09 — NAVIGATION POLISH
+========================================================= */
+$$(".nav-links a").forEach(link => {
+  on(link, "click", () => {
+    const target = document.querySelector(link.getAttribute("href"));
+    if (!target) return;
+
+    // Allow native anchor navigation and browser history to work.
+    target.setAttribute("tabindex", "-1");
+  });
+});
+
+/* =========================================================
+   10 — INITIAL STATE
+========================================================= */
+document.documentElement.classList.add("js-ready");
+console.info("For Baba — birthday experience initialized.");
 </script>
 </body>
 </html>
